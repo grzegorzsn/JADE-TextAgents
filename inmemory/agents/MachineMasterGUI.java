@@ -2,27 +2,122 @@ package inmemory.agents;
 
 import javax.swing.*;
 import java.awt.*;
+<<<<<<< HEAD
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+=======
+import java.awt.event.*;
+import java.io.File;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+>>>>>>> origin/master
 
 /**
- * Created by Grzegorz on 2017-01-23.
+ * Created by Grzegorz&Krzysztof on 2017-01-23.
  */
 public class MachineMasterGUI{
-    private JTextField textField1;
-    private JTextField textField2;
-    private JButton button1;
+    private JTextField szukaneSłowaRozdzielTextField;
+    private JButton Dalej;
     private JPanel machineMasterGUIPanel;
+    private JTextField urlTXT;
+    private JRadioButton URLradiobutton;
+    private JRadioButton path;
+    private JProgressBar progressBar1;
+    private JButton wczytajPlikButton;
     private MachineMaster myAgent;
     private static JFrame frame;
 
     MachineMasterGUI(MachineMaster a)
     {
         myAgent = a;
+<<<<<<< HEAD
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 a.sendJobs();
+=======
+        wczytajPlikButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileopen = new JFileChooser();
+                FileFilter filter = new FileNameExtensionFilter("txt files", "txt");
+                fileopen.addChoosableFileFilter(filter);
+                int ret = fileopen.showDialog(null, "Open file");
+                if (ret == JFileChooser.APPROVE_OPTION) {
+                    File file = fileopen.getSelectedFile();
+                    System.out.println(file);//zwraca plik ktory wybralismy
+            }}
+        });
+        path.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(path.isSelected())
+                {
+                    wczytajPlikButton.setEnabled(true);
+                    urlTXT.setEnabled(false);
+                    URLradiobutton.setSelected(false);
+                }
+                else
+                {
+                    wczytajPlikButton.setEnabled(false);
+                }
+            }
+        });
+        URLradiobutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(URLradiobutton.isSelected())
+                {
+                    wczytajPlikButton.setEnabled(false);
+                    urlTXT.setEnabled(true);
+                    path.setSelected(false);
+                }
+                else
+                {
+                    urlTXT.setEnabled(false);
+                }
+            }
+        });
+        urlTXT.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                if (urlTXT.getText().equals("wpisz adress url..."))
+                {
+                    urlTXT.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                if (urlTXT.getText().equals(""))
+                {
+                    urlTXT.setText("wpisz adress url...");
+                }
+            }
+        });
+
+        szukaneSłowaRozdzielTextField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                if (szukaneSłowaRozdzielTextField.getText().equals("szukane słowa rozdziel \" ; \""))
+                {
+                    szukaneSłowaRozdzielTextField.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                if (szukaneSłowaRozdzielTextField.getText().equals(""))
+                {
+                    szukaneSłowaRozdzielTextField.setText("szukane słowa rozdziel \" ; \"");
+                }
+>>>>>>> origin/master
             }
         });
     }
