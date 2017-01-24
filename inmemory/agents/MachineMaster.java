@@ -139,10 +139,7 @@ public class MachineMaster extends Agent{
         }
     }
 
-    private class listener extends Behaviour
-    {
-        private 
-    }
+
 
     private class sendJobsBehaviour extends Behaviour
     {

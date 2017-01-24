@@ -2,17 +2,17 @@ package inmemory.agents;
 
 import javax.swing.*;
 import java.awt.*;
-<<<<<<< HEAD
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-=======
+
 import java.awt.event.*;
 import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
->>>>>>> origin/master
+
 
 /**
  * Created by Grzegorz&Krzysztof on 2017-01-23.
@@ -32,12 +32,7 @@ public class MachineMasterGUI{
     MachineMasterGUI(MachineMaster a)
     {
         myAgent = a;
-<<<<<<< HEAD
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                a.sendJobs();
-=======
+
         wczytajPlikButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -117,7 +112,7 @@ public class MachineMasterGUI{
                 {
                     szukaneSłowaRozdzielTextField.setText("szukane słowa rozdziel \" ; \"");
                 }
->>>>>>> origin/master
+
             }
         });
     }
