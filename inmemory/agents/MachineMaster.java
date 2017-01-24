@@ -1,5 +1,6 @@
 package inmemory.agents;
 
+import inmemory.textProcessing.TextJob;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.*;
@@ -9,6 +10,8 @@ import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+
+import java.io.IOException;
 
 /**
  * Created by Grzegorz on 2017-01-23.
@@ -24,13 +27,15 @@ public class MachineMaster extends Agent{
         // Create and show the GUI
         myGui = new MachineMasterGUI(this);
         myGui.showGui();
+        System.out.println("MachineMaster "+getAID().getName()+" HERE I AM.");
 
         // Register the service in the yellow pages
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
         ServiceDescription sd = new ServiceDescription();
         sd.setType("text-jobs");
-        sd.setName("machine-with-text-jobs");
+        sd.setName("text-jobs-master");
+        //sd.setName("text-jobs-master");
         dfd.addServices(sd);
         try {
             DFService.register(this, dfd);
@@ -40,10 +45,15 @@ public class MachineMaster extends Agent{
         }
 
         // Add the behaviour
-        //addBehaviour(new OfferRequestsServer());
+        addBehaviour(new refreshWorkersOnMachinePeriodically(this, 1000));
 
         //  Add the behaviour
-        // addBehaviour(new PurchaseOrdersServer());
+         addBehaviour(new sendJobsBehaviour());
+    }
+
+    public void sendJobs()
+    {
+        addBehaviour(new sendJobsBehaviour());
     }
 
     // Put agent clean-up operations here
@@ -61,28 +71,42 @@ public class MachineMaster extends Agent{
         System.out.println("MachineMaster "+getAID().getName()+" terminating.");
     }
 
-    private class refreshWorkersOnPlatform extends TickerBehaviour {
-        public refreshWorkersOnPlatform(Agent a, long period) {
-            super(a, period);
-        }
+    private class refreshWorkersOnPlatform extends Behaviour {
 
-        protected void onTick() {
+        public void action() {
             DFAgentDescription template = new DFAgentDescription();
             ServiceDescription sd = new ServiceDescription();
-            sd.setType("book-selling");
+            sd.setType("text-jobs");
+            sd.setName("text-jobs-worker");
             template.addServices(sd);
             try {
                 DFAgentDescription[] result = DFService.search(myAgent, template);
                 workersOnPlatform = new AID[result.length];
                 for (int i = 0; i < result.length; ++i) {
                     workersOnPlatform[i] = result[i].getName();
+                    System.out.println("Worker "+workersOnPlatform[i]);
                 }
             }
             catch (FIPAException fe) {
                 fe.printStackTrace();
             }
         }
+
+        public boolean done() {
+            return true;
+        }
     }
+
+    private class refreshWorkersOnMachinePeriodically extends TickerBehaviour {
+
+        public refreshWorkersOnMachinePeriodically(Agent a, long period) {
+            super(a, period);
+        }
+
+    protected void onTick() {
+        myAgent.addBehaviour(new refreshWorkersOnPlatform());
+    }
+}
 
     private class refreshWorkersOnMachine extends TickerBehaviour {
         public refreshWorkersOnMachine(Agent a, long period) {
@@ -99,14 +123,14 @@ public class MachineMaster extends Agent{
 
         public void action() {
                     // Send the cfp to all sellers
-                    ACLMessage cfp = new ACLMessage(ACLMessage.CFP);
+                    ACLMessage cfp = new ACLMessage(ACLMessage.PROPOSE);
                     for (int i = 0; i < workersOnPlatform.length; ++i) {
                         cfp.addReceiver(workersOnPlatform[i]);
                     }
-                    cfp.setConversationId("book-trade");
+                    cfp.setConversationId("text-jobs-invitation");
                     cfp.setReplyWith("cfp" + System.currentTimeMillis()); // Unique value
                     myAgent.send(cfp);
-                    mt = MessageTemplate.and(MessageTemplate.MatchConversationId("book-trade"),
+                    mt = MessageTemplate.and(MessageTemplate.MatchConversationId("text-jobs-invitation"),
                             MessageTemplate.MatchInReplyTo(cfp.getReplyWith()));
             }
 
@@ -114,6 +138,49 @@ public class MachineMaster extends Agent{
             return true;
         }
     }
+
+    private class listener extends Behaviour
+    {
+        private 
+    }
+
+    private class sendJobsBehaviour extends Behaviour
+    {
+        private int repliesCnt = 0; // The counter of replies from workers
+        private MessageTemplate mt; // The template to receive replies
+
+        public void action() {
+            // Send the cfp to all sellers
+            if(workersOnPlatform == null || workersOnPlatform.length < 1)
+            {
+                System.out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
+                return;
+            }
+            ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
+            for (int i = 0; i < workersOnPlatform.length; ++i) {
+                request.addReceiver(workersOnPlatform[i]);
+            }
+            TextJob tj = new TextJob();
+            String content = "";
+            try {
+                content = Serializer.toString(tj);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            request.setConversationId("text-jobs-request");
+            request.setReplyWith("request" + System.currentTimeMillis()); // Unique value
+            request.setContent(content);
+            myAgent.send(request);
+            mt = MessageTemplate.and(MessageTemplate.MatchConversationId("text-jobs-invitation"),
+                    MessageTemplate.MatchInReplyTo(request.getReplyWith()));
+            block();
+        }
+
+        public boolean done() {
+            return true;
+        }
+    }
+
 
     private class processJob extends Behaviour {
 

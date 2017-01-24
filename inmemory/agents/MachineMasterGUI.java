@@ -2,6 +2,8 @@ package inmemory.agents;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Grzegorz on 2017-01-23.
@@ -17,6 +19,12 @@ public class MachineMasterGUI{
     MachineMasterGUI(MachineMaster a)
     {
         myAgent = a;
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                a.sendJobs();
+            }
+        });
     }
 
     public void showGui() {
