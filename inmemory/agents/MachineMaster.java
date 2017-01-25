@@ -1,6 +1,10 @@
 package inmemory.agents;
 
+// java -cp lib\jade.jar;out\production\agents\ jade.Boot -gui -agents s1:inmemory.agents.MachineMaster;w1:inmemory.agents.Worker;w2:inmemory.agents.Worker;w3:inmemory.agents.Worker
+
 import inmemory.textProcessing.TextJob;
+import inmemory.textProcessing.TextJobPart;
+import inmemory.textProcessing.TextJobProcessor;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.*;
@@ -10,6 +14,7 @@ import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.wrapper.ControllerException;
 
 import java.io.IOException;
 
@@ -21,7 +26,8 @@ public class MachineMaster extends Agent{
     private MachineMasterGUI myGui;
     private AID[] workersOnPlatform;
     private AID[] workersOnMachine;
-
+    private TextJobPart[] partsToProcess = null;
+    private TextJobPart[] partsProcessed = null;
     // Put agent initializations here
     protected void setup() {
         // Create and show the GUI
@@ -49,6 +55,8 @@ public class MachineMaster extends Agent{
 
         //  Add the behaviour
          addBehaviour(new sendJobsBehaviour());
+
+         addBehaviour(new listener());
     }
 
     public void sendJobs()
@@ -69,6 +77,51 @@ public class MachineMaster extends Agent{
         myGui.close();
         // Printout a dismissal message
         System.out.println("MachineMaster "+getAID().getName()+" terminating.");
+    }
+
+    public void manageJob(String path, String[] input) {
+        partsToProcess = TextJobProcessor.loadParts(path, input);
+        addBehaviour(new refreshWorkersOnPlatform());
+        addBehaviour(new sendPartsToWorkers());
+        addBehaviour(new listener());
+    }
+
+    private class sendPartsToWorkers extends Behaviour {
+
+        public void action() {
+            if(workersOnPlatform == null || workersOnPlatform.length < 1)
+            {
+                System.out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
+                return;
+            }
+            int nrOfWorkers = workersOnPlatform.length;
+            int currentWorker = 0;
+            for( TextJobPart part : partsToProcess)
+            {
+                ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
+                String content = "";
+                request.setLanguage("text-jobs");
+                request.setOntology("text-job-part-to-process");
+                request.addReceiver(workersOnPlatform[currentWorker]);
+                try {
+                    content = Serializer.toString(part);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                request.setConversationId("text-jobs-request");
+                request.setReplyWith("request" + System.currentTimeMillis()); // Unique value
+                request.setContent(content);
+                myAgent.send(request);
+                currentWorker++;
+                if(currentWorker >= nrOfWorkers) currentWorker = 0;
+            }
+            addBehaviour(new listener());
+            block();
+        }
+
+        public boolean done() {
+            return true;
+        }
     }
 
     private class refreshWorkersOnPlatform extends Behaviour {
@@ -122,24 +175,80 @@ public class MachineMaster extends Agent{
         private MessageTemplate mt; // The template to receive replies
 
         public void action() {
-                    // Send the cfp to all sellers
-                    ACLMessage cfp = new ACLMessage(ACLMessage.PROPOSE);
-                    for (int i = 0; i < workersOnPlatform.length; ++i) {
-                        cfp.addReceiver(workersOnPlatform[i]);
-                    }
-                    cfp.setConversationId("text-jobs-invitation");
-                    cfp.setReplyWith("cfp" + System.currentTimeMillis()); // Unique value
-                    myAgent.send(cfp);
-                    mt = MessageTemplate.and(MessageTemplate.MatchConversationId("text-jobs-invitation"),
-                            MessageTemplate.MatchInReplyTo(cfp.getReplyWith()));
+            if(workersOnPlatform == null || workersOnPlatform.length < 1)
+            {
+                System.out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
+                return;
             }
+            int nrOfWorkers = workersOnPlatform.length;
+            int currentWorker = 0;
+            for( TextJobPart part : partsToProcess)
+            {
+                ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
+                String content = "";
+                request.setLanguage("text-jobs");
+                request.setOntology("text-job-sending-job");
+                try {
+                    content = Serializer.toString(part);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                request.setConversationId("text-jobs-request");
+                request.setReplyWith("request" + System.currentTimeMillis()); // Unique value
+                request.setContent(content);
+                myAgent.send(request);
+                currentWorker++;
+                if(currentWorker >= nrOfWorkers) currentWorker = 0;
+            }
+            TextJob tj = new TextJob();
+            addBehaviour(new listener());
+            block();
+        }
 
         public boolean done() {
             return true;
         }
     }
 
+    private class listener extends Behaviour {
+        public void action()
+        {
+            ACLMessage msg = myAgent.receive();
+            if (msg != null  && msg.getLanguage() == "text-jobs") {
+                String ont = msg.getOntology();
+                String content;
+                switch (ont)
+                {
+                    case "text-jobs-job-result":
+                        System.out.println("Result received");
+                        break;
+                    case "text-job-inivitation-accepted":
+                        break;
+                    case "text-job-processed-part":
+                        content = msg.getContent();
+                        TextJobPart part = null;
+                        try {
+                            part = (TextJobPart)Serializer.fromString(content);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("MASTER: Received part " + part.getNumberInQueue() + ". Results: " + part.getResults()) ;
+                        break;
+                    default:
+                        System.out.println("MASTER: Unknown message received");
+                }
+            }
+            addBehaviour(new listener());
+            block();
+        }
 
+        public boolean done()
+        {
+            return true;
+        }
+    }
 
     private class sendJobsBehaviour extends Behaviour
     {
@@ -159,6 +268,9 @@ public class MachineMaster extends Agent{
             }
             TextJob tj = new TextJob();
             String content = "";
+            request.setLanguage("text-jobs");
+            request.setOntology("text-job-sending-job");
+
             try {
                 content = Serializer.toString(tj);
             } catch (IOException e) {

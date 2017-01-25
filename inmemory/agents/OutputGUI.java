@@ -31,7 +31,7 @@ public class OutputGUI {
     public void showOutput() {
         frame = new JFrame("Found text");
         frame.setContentPane(mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int centerX = (int) screenSize.getWidth() / 2;

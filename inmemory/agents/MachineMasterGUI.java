@@ -26,9 +26,11 @@ public class MachineMasterGUI{
     private JRadioButton path;
     private JProgressBar progressBar1;
     private JButton wczytajPlikButton;
+    private JButton button1;
     private MachineMaster myAgent;
     private OutputGUI resultsGui;
     private static JFrame frame;
+    private File file;
 
     MachineMasterGUI(MachineMaster a)
     {
@@ -42,8 +44,8 @@ public class MachineMasterGUI{
                 fileopen.addChoosableFileFilter(filter);
                 int ret = fileopen.showDialog(null, "Open file");
                 if (ret == JFileChooser.APPROVE_OPTION) {
-                    File file = fileopen.getSelectedFile();
-                    System.out.println(file);//zwraca plik ktory wybralismy
+                    file = fileopen.getSelectedFile();
+                    //System.out.println(file);//zwraca plik ktory wybralismy
             }}
         });
         path.addActionListener(new ActionListener() {
@@ -119,10 +121,14 @@ public class MachineMasterGUI{
         Dalej.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String[] input = szukaneSłowaRozdzielTextField.getText().split(";");
+                String path = file.getAbsolutePath();
+                a.manageJob(path, input);
                 resultsGui = new OutputGUI();
                 resultsGui.showOutput();
             }
         });
+
     }
 
     public void showGui() {
