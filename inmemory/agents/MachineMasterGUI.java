@@ -115,6 +115,12 @@ public class MachineMasterGUI{
 
             }
         });
+        Dalej.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                a.sendJobs();
+            }
+        });
     }
 
     public void showGui() {

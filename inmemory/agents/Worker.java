@@ -34,12 +34,7 @@ public class Worker extends Agent {
             fe.printStackTrace();
         }
 
-        // Add the behaviour serving queries from buyer agents
-        addBehaviour(new JobRequestServer());
-
-        // Add the behaviour serving purchase orders from buyer agents
-        // addBehaviour(new BookSellerAgent.PurchaseOrdersServer());
-
+        addBehaviour(new listener());
         System.out.println("WORKER ALIVE");
     }
 
@@ -53,26 +48,45 @@ public class Worker extends Agent {
         }
     }
 
-    private class JobRequestServer extends CyclicBehaviour {
+    private class listener extends CyclicBehaviour {
         public void action() {
-            MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
-            ACLMessage msg = myAgent.receive(mt);
-            if (msg != null) {
-                // CFP Message received. Process it
-                String content = msg.getContent();
-                ACLMessage reply = msg.createReply();
-                TextJob tj = null;
-                try {
-                    tj = (TextJob)Serializer.fromString(content);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+            ACLMessage msg = myAgent.receive();
+            if (msg != null && msg.getLanguage() == "text-jobs") {
+
+                String ont = msg.getOntology();
+                ACLMessage reply;
+                switch (ont)
+                {
+                    case "text-job-sending-job":
+                        String content = msg.getContent();
+                        reply = msg.createReply();
+                        TextJob tj = null;
+                        try {
+                            tj = (TextJob)Serializer.fromString(content);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        reply.setContent(myAgent.getName());
+                        System.out.println(myAgent.getName() + " -----> JOB NAME IS BELOW");
+                        if(tj != null) tj.displayName();
+                        reply.setOntology("text-job-sending-job");
+                        myAgent.send(reply);
+                        break;
+
+                    case "text-job-inivitation":
+                        reply = msg.createReply();
+                        //doMove();
+                        reply.setOntology("text-job-inivitation-accepted");
+
+
+                    default:
+                        System.out.println("WORKER: unknown message");
                 }
-                reply.setContent(myAgent.getName());
-                System.out.println(myAgent.getName() + " -----> JOB NAME IS BELOW");
-                if(tj != null) tj.displayName();
-                myAgent.send(reply);
+
+                addBehaviour(new listener());
+                block();
             }
             else {
                 block();

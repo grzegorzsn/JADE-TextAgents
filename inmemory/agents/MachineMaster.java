@@ -10,6 +10,7 @@ import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.wrapper.ControllerException;
 
 import java.io.IOException;
 
@@ -49,6 +50,8 @@ public class MachineMaster extends Agent{
 
         //  Add the behaviour
          addBehaviour(new sendJobsBehaviour());
+
+         addBehaviour(new listener());
     }
 
     public void sendJobs()
@@ -122,24 +125,50 @@ public class MachineMaster extends Agent{
         private MessageTemplate mt; // The template to receive replies
 
         public void action() {
-                    // Send the cfp to all sellers
-                    ACLMessage cfp = new ACLMessage(ACLMessage.PROPOSE);
-                    for (int i = 0; i < workersOnPlatform.length; ++i) {
-                        cfp.addReceiver(workersOnPlatform[i]);
-                    }
-                    cfp.setConversationId("text-jobs-invitation");
-                    cfp.setReplyWith("cfp" + System.currentTimeMillis()); // Unique value
-                    myAgent.send(cfp);
-                    mt = MessageTemplate.and(MessageTemplate.MatchConversationId("text-jobs-invitation"),
-                            MessageTemplate.MatchInReplyTo(cfp.getReplyWith()));
+            ACLMessage propose = new ACLMessage(ACLMessage.PROPOSE);
+            for (int i = 0; i < workersOnPlatform.length; ++i) {
+                propose.addReceiver(workersOnPlatform[i]);
             }
+            propose.setLanguage("text-jobs");
+            propose.setOntology("text-job-inivitation");
+            try {
+                propose.setContent(getContainerController().getContainerName());
+                System.out.println("Ccntent = container = " + propose.getContent());
+            } catch (ControllerException e) {
+                e.printStackTrace();
+            }
+            myAgent.send(propose);
+        }
 
         public boolean done() {
             return true;
         }
     }
 
+    private class listener extends Behaviour {
+        public void action()
+        {
+            ACLMessage msg = myAgent.receive();
+            if (msg != null  && msg.getLanguage() == "text-jobs") {
+                String ont = msg.getOntology();
+                switch (ont)
+                {
+                    case "text-jobs-job-result":
+                        System.out.println("Result received");
+                        break;
+                    default:
+                        System.out.println("Unknown message received");
+                }
+            }
+            addBehaviour(new listener());
+            block();
+        }
 
+        public boolean done()
+        {
+            return true;
+        }
+    }
 
     private class sendJobsBehaviour extends Behaviour
     {
@@ -159,6 +188,9 @@ public class MachineMaster extends Agent{
             }
             TextJob tj = new TextJob();
             String content = "";
+            request.setLanguage("text-jobs");
+            request.setOntology("text-job-sending-job");
+
             try {
                 content = Serializer.toString(tj);
             } catch (IOException e) {
