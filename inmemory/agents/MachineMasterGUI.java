@@ -27,6 +27,7 @@ public class MachineMasterGUI{
     private JProgressBar progressBar1;
     private JButton wczytajPlikButton;
     private MachineMaster myAgent;
+    private OutputGUI resultsGui;
     private static JFrame frame;
 
     MachineMasterGUI(MachineMaster a)
@@ -118,7 +119,8 @@ public class MachineMasterGUI{
         Dalej.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                a.sendJobs();
+                resultsGui = new OutputGUI();
+                resultsGui.showOutput();
             }
         });
     }
