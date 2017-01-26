@@ -148,7 +148,6 @@ public class MachineMaster extends Agent{
     }
 
     private class refreshWorkersOnPlatform extends Behaviour {
-
         public void action() {
             DFAgentDescription template = new DFAgentDescription();
             ServiceDescription sd = new ServiceDescription();
@@ -286,6 +285,7 @@ public class MachineMaster extends Agent{
         for(TextJobPart part : partsProcessed) {
             fullText.append(part.getLines().toString());
         }
+        
         System.out.println(fullText);
 
         //TODO merge parts.

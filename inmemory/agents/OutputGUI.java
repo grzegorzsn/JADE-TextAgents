@@ -1,5 +1,5 @@
 package inmemory.agents;
-
+import inmemory.DataContainer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -7,7 +7,7 @@ import java.awt.event.*;
 /**
  * Created by Beli on 1/25/2017.
  */
-public class OutputGUI {
+public class OutputGUI extends DataContainer {
     private static JFrame frame;
     private JButton Zamknij;
     private JPanel mainPanel;
@@ -26,7 +26,7 @@ public class OutputGUI {
                 super.componentShown(e);
             }
         });
-    }//raz dwa trzy
+    }
 
     public void showOutput() {
         frame = new JFrame("Found text");
@@ -39,7 +39,7 @@ public class OutputGUI {
         frame.setLocation(centerX - frame.getWidth() / 2, centerY - frame.getHeight() / 2);
         frame.setVisible(true);
         frame.setResizable(false);
-        textArea.append("RAZ DWA TRZY");
+        textArea.append(fileOutput + " oraz lista containerów" + requestedData);
         textArea.setEnabled(false);
     }
 
