@@ -1,23 +1,21 @@
 package inmemory.agents;
-
+import inmemory.DataContainer;
 import javax.swing.*;
 import java.awt.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.awt.event.*;
 import java.io.File;
-
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
 /**
  * Created by Grzegorz&Krzysztof on 2017-01-23.
  */
-public class MachineMasterGUI{
+public class MachineMasterGUI extends DataContainer{
     private JTextField szukaneSłowaRozdzielTextField;
     private JButton Dalej;
     private JPanel machineMasterGUIPanel;
@@ -30,11 +28,9 @@ public class MachineMasterGUI{
     private MachineMaster myAgent;
     private static JFrame frame;
     private File file;
-
     MachineMasterGUI(MachineMaster a)
     {
         myAgent = a;
-
         wczytajPlikButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -120,9 +116,10 @@ public class MachineMasterGUI{
         Dalej.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] input = szukaneSłowaRozdzielTextField.getText().split(";");
+                fileOutput = urlTXT.getText();
                 String path = file.getAbsolutePath();
-                a.manageJob(path, input);
+                requestedData = szukaneSłowaRozdzielTextField.getText().split(";");
+                a.manageJob(path, requestedData);
             }
         });
 

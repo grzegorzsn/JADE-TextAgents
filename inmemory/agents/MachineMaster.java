@@ -148,7 +148,6 @@ public class MachineMaster extends Agent{
     }
 
     private class refreshWorkersOnPlatform extends Behaviour {
-
         public void action() {
             DFAgentDescription template = new DFAgentDescription();
             ServiceDescription sd = new ServiceDescription();

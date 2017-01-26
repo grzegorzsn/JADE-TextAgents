@@ -6,9 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by Grzegorz on 2017-01-23.
- */
 public class TextJob implements Serializable {
 
     public static void main(String args[]){
