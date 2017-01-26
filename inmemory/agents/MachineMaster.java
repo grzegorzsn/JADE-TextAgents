@@ -3,7 +3,6 @@ package inmemory.agents;
 // java -cp lib\jade.jar;out\production\agents\ jade.Boot -gui -agents s1:inmemory.agents.MachineMaster;w1:inmemory.agents.Worker;w2:inmemory.agents.Worker;w3:inmemory.agents.Worker
 // java -cp lib\jade.jar;out\production\agents\ jade.Boot -container -host 192.168.0.80 -agents w4:inmemory.agents.Worker
 
-import inmemory.textProcessing.TextJob;
 import inmemory.textProcessing.TextJobPart;
 import inmemory.textProcessing.TextJobProcessor;
 import jade.core.AID;
@@ -36,6 +35,7 @@ public class MachineMaster extends Agent{
     private OutputGUI resultsGui;
     private Random random = new Random();
     private boolean inmmemory = true; // TODO GUI radiobutton needed.
+    private StringBuilder fullText = new StringBuilder();
 
     // Put agent initializations here
     protected void setup() {
@@ -283,8 +283,10 @@ public class MachineMaster extends Agent{
         Collections.sort(partsProcessed);
 
         System.out.println("MASTER: job done, parts sorted.");
-        for(TextJobPart part : partsProcessed)
-            System.out.println(part.getResults());
+        for(TextJobPart part : partsProcessed) {
+            fullText.append(part.getLines().toString());
+        }
+        System.out.println(fullText);
 
         //TODO merge parts.
 

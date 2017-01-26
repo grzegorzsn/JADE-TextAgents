@@ -1,7 +1,6 @@
 package inmemory.agents;
 
 import inmemory.BookSellerAgent;
-import inmemory.textProcessing.TextJob;
 import inmemory.textProcessing.TextJobPart;
 import inmemory.textProcessing.TextJobProcessor;
 import jade.core.Agent;
@@ -51,6 +50,7 @@ public class Worker extends Agent {
         }
     }
 
+
     private class listener extends CyclicBehaviour {
         public void action() {
             ACLMessage msg = myAgent.receive();
@@ -61,24 +61,6 @@ public class Worker extends Agent {
                 String content;
                 switch (ont)
                 {
-                    case "text-job-sending-job":
-                        content = msg.getContent();
-                        reply = msg.createReply();
-                        TextJob tj = null;
-                        try {
-                            tj = (TextJob)Serializer.fromString(content);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                        reply.setContent(myAgent.getName());
-                        System.out.println(myAgent.getName() + " -----> JOB NAME IS BELOW");
-                        //if(tj != null) tj.displayName();
-                        reply.setOntology("text-job-sending-job");
-                        myAgent.send(reply);
-                        break;
-
                     case "text-job-part-to-process":
                         content = msg.getContent();
                         reply = msg.createReply();
@@ -137,6 +119,4 @@ public class Worker extends Agent {
             }
         }
     }  // End of inner class OfferRequestsServer
-
-
 }

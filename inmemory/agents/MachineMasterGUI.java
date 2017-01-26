@@ -122,7 +122,7 @@ public class MachineMasterGUI{
             public void actionPerformed(ActionEvent e) {
                 String[] input = szukaneSłowaRozdzielTextField.getText().split(";");
                 String path = file.getAbsolutePath();
-                a.manageJob(path, input);
+                myAgent.manageJob(path, input);
             }
         });
 
