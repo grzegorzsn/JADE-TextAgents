@@ -11,9 +11,10 @@ import java.util.ArrayList;
 public class TextJobProcessor {
 
 
-    public static TextJobPart[] loadParts(String filePath, String[] input) {
+
+    public static ArrayList<TextJobPart> loadParts(String filePath, String[] input) {
         //CO ILE LINII DZIELIC TEKST | liczba linii / liczba agentow (zaokragl w gore)
-        float part = (float) 50.0;
+        float numberOfLinesInFile = (float) 50.0;
         //ile lini w pliku (potrzebne do stworzenia arraya fragmentow o odpowiedniej wielkosci)
         long linesNumber = 0;
         //linie tekstu
@@ -29,7 +30,7 @@ public class TextJobProcessor {
         StringBuilder everything = new StringBuilder();
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("D:\\Studia\\PW\\SAG\\JADE-TextAgents\\inmemory\\textProcessing\\test.txt"));
+            br = new BufferedReader(new FileReader(filePath));
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -37,7 +38,7 @@ public class TextJobProcessor {
                 linesNumber++;
             }
             lines = everything.toString().split("\\n");
-            parts = new TextJobPart[(int) Math.ceil(linesNumber / part)];
+            parts = new TextJobPart[(int) Math.ceil(linesNumber / numberOfLinesInFile)];
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,14 +59,19 @@ public class TextJobProcessor {
         }
 
         for (int i = 0; i < lines.length; i++) {
-            if (linesCounter > 50) {
+            if (linesCounter > numberOfLinesInFile) {
+                parts[currentFragmentSave].setOffset(currentFragmentSave*(int)numberOfLinesInFile);
                 currentFragmentSave++;
                 linesCounter = 0;
             }
             parts[currentFragmentSave].addLine(lines[i] + "\n");
             linesCounter++;
         }
-        return parts;
+        ArrayList<TextJobPart> partsArray = new ArrayList<TextJobPart>();
+        for( TextJobPart  part : parts)
+            partsArray.add(part);
+
+        return partsArray;
     }
 
     public static TextJobPart process(TextJobPart part)

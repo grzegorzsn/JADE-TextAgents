@@ -17,7 +17,7 @@ public class OutputGUI {
         Zamknij.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                frame.dispose();
             }
         });
         textArea.addComponentListener(new ComponentAdapter() {

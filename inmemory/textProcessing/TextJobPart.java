@@ -13,13 +13,14 @@ import java.util.ArrayList;
  * Time: 02:16
  * To change this template use File | Settings | File Templates.
  */
-public class TextJobPart implements Serializable {
+public class TextJobPart implements Comparable, Serializable {
 
     private int numberInQueue = 0; //numer fragmentu
     private int offset = 0; //numer startowej linii
     StringBuilder lines; //tekst
     ArrayList<Integer> results = new ArrayList<Integer>();
     private String[] input;
+    private int id = 0;
 
     public TextJobPart(){
         lines = new StringBuilder();
@@ -43,13 +44,20 @@ public class TextJobPart implements Serializable {
         return lines;
     }
     public ArrayList<Integer> getResults(){
-        return results;
+        ArrayList<Integer> resultsShifted = new ArrayList<>();
+        for(int result : results)
+            resultsShifted.add(result + offset);
+        return resultsShifted;
     }
-
     public String[] getInput() {
         return input;
     }
-
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public void setInput(String[] input) {
         this.input = input;
     }
@@ -60,5 +68,9 @@ public class TextJobPart implements Serializable {
         return numberInQueue;
     }
 
-
+    @Override
+    public int compareTo(Object o) {
+        TextJobPart other = ((TextJobPart)o);
+        return this.numberInQueue > other.numberInQueue ? +1 : this.numberInQueue < other.numberInQueue ? -1 : 0;
+    }
 }

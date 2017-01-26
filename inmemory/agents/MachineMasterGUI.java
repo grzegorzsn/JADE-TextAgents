@@ -28,7 +28,6 @@ public class MachineMasterGUI{
     private JButton wczytajPlikButton;
     private JButton button1;
     private MachineMaster myAgent;
-    private OutputGUI resultsGui;
     private static JFrame frame;
     private File file;
 
@@ -124,8 +123,6 @@ public class MachineMasterGUI{
                 String[] input = szukaneSłowaRozdzielTextField.getText().split(";");
                 String path = file.getAbsolutePath();
                 a.manageJob(path, input);
-                resultsGui = new OutputGUI();
-                resultsGui.showOutput();
             }
         });
 
