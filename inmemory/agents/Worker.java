@@ -5,6 +5,7 @@ import inmemory.textProcessing.TextJob;
 import inmemory.textProcessing.TextJobPart;
 import inmemory.textProcessing.TextJobProcessor;
 import jade.core.Agent;
+import jade.core.Location;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -53,8 +54,8 @@ public class Worker extends Agent {
     private class listener extends CyclicBehaviour {
         public void action() {
             ACLMessage msg = myAgent.receive();
-            if (msg != null && msg.getLanguage() == "text-jobs") {
-
+            if (msg != null && msg.getLanguage().equals("text-jobs")) {
+                //System.out.println("Worker " + getLocalName() + " some msg received");
                 String ont = msg.getOntology();
                 ACLMessage reply;
                 String content;
@@ -84,6 +85,7 @@ public class Worker extends Agent {
                         TextJobPart part = null;
                         try {
                             part = (TextJobPart)Serializer.fromString(content);
+                            System.out.println("Worker " + getLocalName() + " job received");
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (ClassNotFoundException e) {
@@ -103,9 +105,25 @@ public class Worker extends Agent {
 
                     case "text-job-inivitation":
                         reply = msg.createReply();
-                        //doMove();
-                        reply.setOntology("text-job-inivitation-accepted");
-
+                        msg.getSender().getResolversArray();
+                        Location dest = null;
+                        try {
+                            dest = (Location)Serializer.fromString( msg.getContent());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        if (dest != null) {
+                            doMove(dest);
+                            reply.setOntology("text-job-inivitation-accepted");
+                        }
+                        else
+                        {
+                            reply.setOntology("text-job-inivitation-incorrect");
+                        }
+                        myAgent.send(reply);
+                        break;
 
                     default:
                         System.out.println("WORKER: unknown message");

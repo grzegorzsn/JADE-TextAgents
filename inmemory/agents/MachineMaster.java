@@ -1,6 +1,7 @@
 package inmemory.agents;
 
 // java -cp lib\jade.jar;out\production\agents\ jade.Boot -gui -agents s1:inmemory.agents.MachineMaster;w1:inmemory.agents.Worker;w2:inmemory.agents.Worker;w3:inmemory.agents.Worker
+// java -cp lib\jade.jar;out\production\agents\ jade.Boot -container -host 192.168.0.80 -agents w4:inmemory.agents.Worker
 
 import inmemory.textProcessing.TextJob;
 import inmemory.textProcessing.TextJobPart;
@@ -17,6 +18,9 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.wrapper.ControllerException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 /**
  * Created by Grzegorz on 2017-01-23.
@@ -26,8 +30,13 @@ public class MachineMaster extends Agent{
     private MachineMasterGUI myGui;
     private AID[] workersOnPlatform;
     private AID[] workersOnMachine;
-    private TextJobPart[] partsToProcess = null;
-    private TextJobPart[] partsProcessed = null;
+    private ArrayList<TextJobPart> partsToProcess = null;
+    private ArrayList<TextJobPart> partsProcessed = null;
+    private boolean jobProcessing = false;
+    private OutputGUI resultsGui;
+    private Random random = new Random();
+    private boolean inmmemory = true; // TODO GUI radiobutton needed.
+
     // Put agent initializations here
     protected void setup() {
         // Create and show the GUI
@@ -54,15 +63,11 @@ public class MachineMaster extends Agent{
         addBehaviour(new refreshWorkersOnMachinePeriodically(this, 1000));
 
         //  Add the behaviour
-         addBehaviour(new sendJobsBehaviour());
+         //addBehaviour(new sendJobsBehaviour());
 
          addBehaviour(new listener());
     }
 
-    public void sendJobs()
-    {
-        addBehaviour(new sendJobsBehaviour());
-    }
 
     // Put agent clean-up operations here
     protected void takeDown() {
@@ -80,8 +85,26 @@ public class MachineMaster extends Agent{
     }
 
     public void manageJob(String path, String[] input) {
+
+        /*  TODO
+            According to inmmemory flag,
+            jobs should be processed on the same machine or on other machines.
+            To simplify machine may be understood as single container.
+
+            If inmemory is true workers from other machines should be invited to machine of master.
+            Then workers on machine should be asked to process parts of job.
+
+            Else job parts should be sent to workers on other machines.
+            In this case job parts must not be processed on the machine, which contains master.
+            */
+
         partsToProcess = TextJobProcessor.loadParts(path, input);
+        partsProcessed = new ArrayList<TextJobPart>();
+        for (TextJobPart part : partsToProcess)
+            part.setId(random.nextInt());
+        jobProcessing = true;
         addBehaviour(new refreshWorkersOnPlatform());
+        addBehaviour(new inviteWorkers());
         addBehaviour(new sendPartsToWorkers());
         addBehaviour(new listener());
     }
@@ -182,25 +205,21 @@ public class MachineMaster extends Agent{
             }
             int nrOfWorkers = workersOnPlatform.length;
             int currentWorker = 0;
-            for( TextJobPart part : partsToProcess)
+            for(AID workerAID : workersOnPlatform)
             {
                 ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
-                String content = "";
+                request.addReceiver(workerAID);
+                String content = null;
                 request.setLanguage("text-jobs");
-                request.setOntology("text-job-sending-job");
+                request.setOntology("text-job-inivitation");
                 try {
-                    content = Serializer.toString(part);
+                    content = Serializer.toString(here());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                request.setConversationId("text-jobs-request");
-                request.setReplyWith("request" + System.currentTimeMillis()); // Unique value
                 request.setContent(content);
                 myAgent.send(request);
-                currentWorker++;
-                if(currentWorker >= nrOfWorkers) currentWorker = 0;
             }
-            TextJob tj = new TextJob();
             addBehaviour(new listener());
             block();
         }
@@ -214,7 +233,7 @@ public class MachineMaster extends Agent{
         public void action()
         {
             ACLMessage msg = myAgent.receive();
-            if (msg != null  && msg.getLanguage() == "text-jobs") {
+            if (msg != null  && msg.getLanguage().equals("text-jobs")) {
                 String ont = msg.getOntology();
                 String content;
                 switch (ont)
@@ -225,6 +244,7 @@ public class MachineMaster extends Agent{
                     case "text-job-inivitation-accepted":
                         break;
                     case "text-job-processed-part":
+                        if(!jobProcessing) break; // TODO send message to Worker, that there is no job processing.
                         content = msg.getContent();
                         TextJobPart part = null;
                         try {
@@ -234,7 +254,9 @@ public class MachineMaster extends Agent{
                         } catch (ClassNotFoundException e) {
                             e.printStackTrace();
                         }
-                        System.out.println("MASTER: Received part " + part.getNumberInQueue() + ". Results: " + part.getResults()) ;
+                        System.out.println("Part received: " +  part.getResults());
+                        partsProcessed.add(part); // TODO verify part is correctly processed.
+                        if(checkJobProcessed()) manageJobProcessed();
                         break;
                     default:
                         System.out.println("MASTER: Unknown message received");
@@ -250,45 +272,27 @@ public class MachineMaster extends Agent{
         }
     }
 
-    private class sendJobsBehaviour extends Behaviour
-    {
-        private int repliesCnt = 0; // The counter of replies from workers
-        private MessageTemplate mt; // The template to receive replies
+    private boolean checkJobProcessed() {
+        // TODO: check more precissly.
+        return partsProcessed.size() == partsToProcess.size();
 
-        public void action() {
-            // Send the cfp to all sellers
-            if(workersOnPlatform == null || workersOnPlatform.length < 1)
-            {
-                System.out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
-                return;
-            }
-            ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
-            for (int i = 0; i < workersOnPlatform.length; ++i) {
-                request.addReceiver(workersOnPlatform[i]);
-            }
-            TextJob tj = new TextJob();
-            String content = "";
-            request.setLanguage("text-jobs");
-            request.setOntology("text-job-sending-job");
-
-            try {
-                content = Serializer.toString(tj);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            request.setConversationId("text-jobs-request");
-            request.setReplyWith("request" + System.currentTimeMillis()); // Unique value
-            request.setContent(content);
-            myAgent.send(request);
-            mt = MessageTemplate.and(MessageTemplate.MatchConversationId("text-jobs-invitation"),
-                    MessageTemplate.MatchInReplyTo(request.getReplyWith()));
-            block();
-        }
-
-        public boolean done() {
-            return true;
-        }
     }
+
+    private void manageJobProcessed()
+    {
+        Collections.sort(partsProcessed);
+
+        System.out.println("MASTER: job done, parts sorted.");
+        for(TextJobPart part : partsProcessed)
+            System.out.println(part.getResults());
+
+        //TODO merge parts.
+
+        resultsGui = new OutputGUI();
+        resultsGui.showOutput();
+
+    }
+
 
 
     private class processJob extends Behaviour {
