@@ -3,6 +3,7 @@ package inmemory.agents;
 // java -cp lib\jade.jar;out\production\agents\ jade.Boot -gui -agents s1:inmemory.agents.MachineMaster;w1:inmemory.agents.Worker;w2:inmemory.agents.Worker;w3:inmemory.agents.Worker
 // java -cp lib\jade.jar;out\production\agents\ jade.Boot -container -host 192.168.0.80 -agents w4:inmemory.agents.Worker
 
+import inmemory.DataContainer;
 import inmemory.textProcessing.TextJobPart;
 import inmemory.textProcessing.TextJobProcessor;
 import jade.core.AID;
@@ -25,7 +26,7 @@ import java.util.Random;
  * Created by Grzegorz on 2017-01-23.
  */
 
-public class MachineMaster extends Agent{
+public class MachineMaster extends Agent {
     private MachineMasterGUI myGui;
     private AID[] workersOnPlatform;
     private AID[] workersOnMachine;
@@ -281,14 +282,16 @@ public class MachineMaster extends Agent{
     {
         Collections.sort(partsProcessed);
 
+        DataContainer.foundLines = new ArrayList<Integer>();
+
         System.out.println("MASTER: job done, parts sorted.");
         for(TextJobPart part : partsProcessed) {
             fullText.append(part.getLines().toString());
-        }
-        
-        System.out.println(fullText);
 
-        //TODO merge parts.
+            DataContainer.foundLines.addAll(part.getResults());
+        }
+
+        DataContainer.TextToParse = fullText.toString();
 
         resultsGui = new OutputGUI();
         resultsGui.showOutput();

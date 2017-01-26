@@ -118,12 +118,8 @@ public class MachineMasterGUI extends DataContainer{
             public void actionPerformed(ActionEvent e) {
                 fileOutput = urlTXT.getText();
                 String path = file.getAbsolutePath();
-<<<<<<< HEAD
-                myAgent.manageJob(path, input);
-=======
                 requestedData = szukaneSłowaRozdzielTextField.getText().split(";");
-                a.manageJob(path, requestedData);
->>>>>>> 938b7391c5fc97f9b9f605984b3458fe3f9d8ec8
+                myAgent.manageJob(path, requestedData);
             }
         });
 
