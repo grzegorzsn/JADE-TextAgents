@@ -206,6 +206,7 @@ public class Aho {
             if (Output.containsKey(currState.getId())){
                 out.addAll(Output.get(currState.getId()));
                 results.add(lineCount);
+
                 wordStart.add(wordIndexStart-(Output.get(currState.getId()).getFirst().length()-1));
                 wordEnd.add(wordIndexStart);
             }

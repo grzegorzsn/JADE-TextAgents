@@ -59,13 +59,14 @@ public class TextJobProcessor {
         }
 
         for (int i = 0; i < lines.length; i++) {
+            parts[currentFragmentSave].addLine(lines[i] + "\n");
+            linesCounter++;
+
             if (linesCounter > numberOfLinesInFile) {
                 parts[currentFragmentSave].setOffset(currentFragmentSave*(int)numberOfLinesInFile);
                 currentFragmentSave++;
                 linesCounter = 0;
             }
-            parts[currentFragmentSave].addLine(lines[i] + "\n");
-            linesCounter++;
         }
         ArrayList<TextJobPart> partsArray = new ArrayList<TextJobPart>();
         for( TextJobPart  part : parts)

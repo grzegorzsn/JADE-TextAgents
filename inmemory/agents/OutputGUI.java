@@ -38,36 +38,38 @@ public class OutputGUI extends DataContainer {
     {
         int counter = 0;
         Scanner scanner = new Scanner(Data);
+        StyledDocument doc = panel.getStyledDocument();
+        Style style = panel.addStyle("I'm a Style", null);
+
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            for (int i : foundLines) {
-                StyledDocument doc = panel.getStyledDocument();
-                Style style = panel.addStyle("I'm a Style", null);
-                if(i == counter) {
-                    StyleConstants.setForeground(style, Color.red);
-                    try {
-                        doc.insertString(doc.getLength(), line + "\n", style);
-                        break;
-                    }
-                    catch (BadLocationException ex) {
-                    }
+
+            if(foundLines.contains(counter)) {
+                StyleConstants.setForeground(style, Color.red);
+                try {
+                    doc.insertString(doc.getLength(), line + "\n", style);
+                    //break;
                 }
-                else {
-                    StyleConstants.setForeground(style, Color.black);
-                    try {
-                        doc.insertString(doc.getLength(), line + "\n", style);
-                        break;
-                    }
-                    catch (BadLocationException ex) {
-                    }
+                catch (BadLocationException ex) {
+                }
+            }else {
+                StyleConstants.setForeground(style, Color.black);
+                try {
+                    doc.insertString(doc.getLength(), line + "\n", style);
+                    //break;
+                }
+                catch (BadLocationException ex) {
                 }
             }
+
             counter++;
         }
         scanner.close();
     }
 
     public void showOutput() {
+        textPanel.setText("");
+
         frame = new JFrame("Found text");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -92,6 +94,7 @@ public class OutputGUI extends DataContainer {
         frame.setContentPane(contentPane);
         frame.pack();
         frame.setVisible(true);
+
     }
 
 
