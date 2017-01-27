@@ -34,7 +34,7 @@ public class OutputGUI extends DataContainer {
             }
         });
     }
-    public static String colorTextData(String Data, JTextPane panel)
+    public void colorTextData(String Data, JTextPane panel)
     {
         int counter = 0;
         Scanner scanner = new Scanner(Data);
@@ -43,29 +43,28 @@ public class OutputGUI extends DataContainer {
             for (int i : foundLines) {
                 StyledDocument doc = panel.getStyledDocument();
                 Style style = panel.addStyle("I'm a Style", null);
-                if(i == counter)
-                {
+                if(i == counter) {
                     StyleConstants.setForeground(style, Color.red);
                     try {
-                        doc.insertString(doc.getLength(), line, style);
+                        doc.insertString(doc.getLength(), line + "\n", style);
                         break;
-                    } catch (BadLocationException ex) {
+                    }
+                    catch (BadLocationException ex) {
                     }
                 }
                 else {
                     StyleConstants.setForeground(style, Color.black);
                     try {
-                        doc.insertString(doc.getLength(), line, style);
+                        doc.insertString(doc.getLength(), line + "\n", style);
                         break;
-                    } catch (BadLocationException ex) {
+                    }
+                    catch (BadLocationException ex) {
                     }
                 }
             }
             counter++;
         }
         scanner.close();
-
-        return Data;
     }
 
     public void showOutput() {
@@ -78,20 +77,6 @@ public class OutputGUI extends DataContainer {
         int centerY = (int) screenSize.getHeight() / 2;
 
         frame.setLocation(centerX - frame.getWidth() / 2, centerY - frame.getHeight() / 2);
-<<<<<<< HEAD
-        frame.setResizable(false);
-
-        textArea.append(TextToParse);
-        textArea.setEditable(false);
-
-
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setBounds(0, 0, 800, 600);
-        JPanel contentPane = new JPanel(null);
-        contentPane.setPreferredSize(new Dimension(800, 600));
-=======
         frame.setResizable(true);
         colorTextData(TextToParse, textPanel);
         //textPanel.setText(TextToParse);
@@ -103,15 +88,10 @@ public class OutputGUI extends DataContainer {
         scrollPane.setBounds(0, 0, 600, 800);
         JPanel contentPane = new JPanel(null);
         contentPane.setPreferredSize(new Dimension(600, 800));
->>>>>>> fdc5f005355e330416d702f074c3866e9822da35
         contentPane.add(scrollPane);
         frame.setContentPane(contentPane);
         frame.pack();
         frame.setVisible(true);
-<<<<<<< HEAD
-
-=======
->>>>>>> fdc5f005355e330416d702f074c3866e9822da35
     }
 
 
