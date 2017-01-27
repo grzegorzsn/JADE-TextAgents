@@ -14,7 +14,7 @@ public class TextJobProcessor {
 
     public static ArrayList<TextJobPart> loadParts(String filePath, String[] input) {
         //CO ILE LINII DZIELIC TEKST | liczba linii / liczba agentow (zaokragl w gore)
-        float numberOfLinesInFile = (float) 50.0;
+        float numberOfLinesInFragment = (float) 5000.0;
         //ile lini w pliku (potrzebne do stworzenia arraya fragmentow o odpowiedniej wielkosci)
         long linesNumber = 0;
         //linie tekstu
@@ -38,7 +38,7 @@ public class TextJobProcessor {
                 linesNumber++;
             }
             lines = everything.toString().split("\\n");
-            parts = new TextJobPart[(int) Math.ceil(linesNumber / numberOfLinesInFile)];
+            parts = new TextJobPart[(int) Math.ceil(linesNumber / numberOfLinesInFragment)];
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,18 +55,18 @@ public class TextJobProcessor {
             parts[i] = new TextJobPart();
             parts[i].setNumber(i);
             parts[i].setInput(input);
-
         }
 
         for (int i = 0; i < lines.length; i++) {
-            parts[currentFragmentSave].addLine(lines[i] + "\n");
-            linesCounter++;
 
-            if (linesCounter > numberOfLinesInFile) {
-                parts[currentFragmentSave].setOffset(currentFragmentSave*(int)numberOfLinesInFile);
+            if (linesCounter > numberOfLinesInFragment) {
+                parts[currentFragmentSave].setOffset(currentFragmentSave*(int)numberOfLinesInFragment);
                 currentFragmentSave++;
                 linesCounter = 0;
             }
+
+            parts[currentFragmentSave].addLine(lines[i] + "\n");
+            linesCounter++;
         }
         ArrayList<TextJobPart> partsArray = new ArrayList<TextJobPart>();
         for( TextJobPart  part : parts)

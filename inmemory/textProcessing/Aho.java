@@ -15,8 +15,9 @@ public class Aho {
     private int lineCount = 0;
     private int wordIndexStart = 0;
     private ArrayList<Integer> results = new ArrayList<Integer>();
-    private ArrayList<Integer> wordStart = new ArrayList<Integer>();
-    private ArrayList<Integer> wordEnd = new ArrayList<Integer>();
+    private static ArrayList<Integer> wordStart = new ArrayList<Integer>();
+    private static ArrayList<Integer> wordEnd = new ArrayList<Integer>();
+    private int wordFounded = 0;
 
     protected class state{
         private int id;
@@ -177,7 +178,7 @@ public class Aho {
 
             if(cc == '\n') {
                 lineCount++;
-                wordIndexStart = -1;
+                //wordIndexStart = -1;
             }
 
 
@@ -207,13 +208,18 @@ public class Aho {
                 out.addAll(Output.get(currState.getId()));
                 results.add(lineCount);
 
+                System.out.println("AHO - Word found at index: "+(i-(Output.get(currState.getId()).getFirst().length()-1)));
+
                 wordStart.add(wordIndexStart-(Output.get(currState.getId()).getFirst().length()-1));
-                wordEnd.add(wordIndexStart);
+                //wordEnd.add(wordIndexStart+1);
+                wordEnd.add(Output.get(currState.getId()).getFirst().length());
+                wordFounded++;
             }
             wordIndexStart++;
         }
         DataContainer.wordIndexStart = wordStart;
         DataContainer.wordIndexStop = wordEnd;
+        System.out.println("AHO - How many words found: "+wordFounded);
         return results;
     }
 }
