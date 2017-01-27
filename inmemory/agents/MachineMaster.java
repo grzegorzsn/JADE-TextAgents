@@ -8,6 +8,7 @@ import inmemory.textProcessing.TextJobPart;
 import inmemory.textProcessing.TextJobProcessor;
 import jade.core.AID;
 import jade.core.Agent;
+import jade.core.Location;
 import jade.core.behaviours.*;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Created by Grzegorz on 2017-01-23.
  */
@@ -29,13 +32,14 @@ import java.util.Random;
 public class MachineMaster extends Agent {
     private MachineMasterGUI myGui;
     private AID[] workersOnPlatform;
-    private AID[] workersOnMachine;
+    private ArrayList<AID> workersOnMachine;
+    private ArrayList<AID> workersOutsideMachine;
     private ArrayList<TextJobPart> partsToProcess = null;
     private ArrayList<TextJobPart> partsProcessed = null;
     private boolean jobProcessing = false;
     private OutputGUI resultsGui;
     private Random random = new Random();
-    private boolean inmmemory = true; // TODO GUI radiobutton needed.
+    private boolean inmmemory = false; // TODO GUI radiobutton needed.
     private StringBuilder fullText = new StringBuilder();
 
     // Put agent initializations here
@@ -61,6 +65,7 @@ public class MachineMaster extends Agent {
         }
 
         // Add the behaviour
+        addBehaviour(new refreshWorkersPeriodically(this, 1000));
         addBehaviour(new refreshWorkersOnMachinePeriodically(this, 1000));
 
         //  Add the behaviour
@@ -99,13 +104,20 @@ public class MachineMaster extends Agent {
             In this case job parts must not be processed on the machine, which contains master.
             */
 
+
         partsToProcess = TextJobProcessor.loadParts(path, input);
         partsProcessed = new ArrayList<TextJobPart>();
         for (TextJobPart part : partsToProcess)
             part.setId(random.nextInt());
         jobProcessing = true;
         addBehaviour(new refreshWorkersOnPlatform());
-        addBehaviour(new inviteWorkers());
+        addBehaviour(new askWorkersForLocations());
+        if(inmmemory) addBehaviour(new inviteWorkers());
+        try {
+            sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         addBehaviour(new sendPartsToWorkers());
         addBehaviour(new listener());
     }
@@ -118,7 +130,13 @@ public class MachineMaster extends Agent {
                 System.out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
                 return;
             }
-            int nrOfWorkers = workersOnPlatform.length;
+            ArrayList<AID> receivers;
+            if(inmmemory)
+                receivers = workersOnMachine;
+            else
+                receivers = workersOutsideMachine;
+            int nrOfWorkers = receivers.size();
+            if(nrOfWorkers == 0) return;
             int currentWorker = 0;
             for( TextJobPart part : partsToProcess)
             {
@@ -126,7 +144,7 @@ public class MachineMaster extends Agent {
                 String content = "";
                 request.setLanguage("text-jobs");
                 request.setOntology("text-job-part-to-process");
-                request.addReceiver(workersOnPlatform[currentWorker]);
+                request.addReceiver(receivers.get(currentWorker));
                 try {
                     content = Serializer.toString(part);
                 } catch (IOException e) {
@@ -173,30 +191,50 @@ public class MachineMaster extends Agent {
         }
     }
 
-    private class refreshWorkersOnMachinePeriodically extends TickerBehaviour {
 
-        public refreshWorkersOnMachinePeriodically(Agent a, long period) {
-            super(a, period);
+    private class askWorkersForLocations extends Behaviour {
+        public void action() {
+            workersOnMachine = new ArrayList<AID>();
+            workersOutsideMachine = new ArrayList<AID>();
+            if(workersOnPlatform == null || workersOnPlatform.length < 1)
+            {
+                System.out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
+                return;
+            }
+            for(AID workerAID : workersOnPlatform)
+            {
+                ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
+                request.addReceiver(workerAID);
+                String content = null;
+                request.setLanguage("text-jobs");
+                request.setOntology("text-job-location-question");
+                request.setContent(content);
+                myAgent.send(request);
+            }
+            addBehaviour(new listener());
+            block();
         }
 
-    protected void onTick() {
-        myAgent.addBehaviour(new refreshWorkersOnPlatform());
+        public boolean done() {
+            return true;
+        }
     }
-}
 
-    private class refreshWorkersOnMachine extends TickerBehaviour {
-        public refreshWorkersOnMachine(Agent a, long period) {
-            super(a, period);
-        }
-        protected void onTick() {
-        }
+    private class refreshWorkersOnMachinePeriodically extends TickerBehaviour {
+        public refreshWorkersOnMachinePeriodically(Agent a, long period) {super(a, period);}
+            protected void onTick() {
+                myAgent.addBehaviour(new askWorkersForLocations());
+            }
+    }
+
+    private class refreshWorkersPeriodically extends TickerBehaviour
+    {
+        public refreshWorkersPeriodically(Agent a, long period) {super(a,period);}
+        protected void onTick(){myAgent.addBehaviour(new refreshWorkersOnPlatform());}
     }
 
     private class inviteWorkers extends Behaviour
     {
-        private int repliesCnt = 0; // The counter of replies from workers
-        private MessageTemplate mt; // The template to receive replies
-
         public void action() {
             if(workersOnPlatform == null || workersOnPlatform.length < 1)
             {
@@ -241,8 +279,10 @@ public class MachineMaster extends Agent {
                     case "text-jobs-job-result":
                         System.out.println("Result received");
                         break;
+
                     case "text-job-inivitation-accepted":
                         break;
+
                     case "text-job-processed-part":
                         if(!jobProcessing) break; // TODO send message to Worker, that there is no job processing.
                         content = msg.getContent();
@@ -258,6 +298,21 @@ public class MachineMaster extends Agent {
                         partsProcessed.add(part); // TODO verify part is correctly processed.
                         if(checkJobProcessed()) manageJobProcessed();
                         break;
+
+                    case "text-job-location-question-response":
+                        content = msg.getContent();
+                        Location receivedLocation = null;
+                        try {
+                            receivedLocation = (Location)Serializer.fromString(content);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        if(receivedLocation.equals(here())) workersOnMachine.add(msg.getSender());
+                        else workersOutsideMachine.add(msg.getSender());
+                        break;
+
                     default:
                         System.out.println("MASTER: Unknown message received");
                 }

@@ -107,6 +107,21 @@ public class Worker extends Agent {
                         myAgent.send(reply);
                         break;
 
+                    case "text-job-location-question":
+                        reply = msg.createReply();
+                        msg.getSender().getResolversArray();
+                        reply.setOntology("text-job-location-question-response");
+                        content = null;
+                        Location loc = here();
+                        try {
+                            content = Serializer.toString(loc);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        reply.setContent(content);
+                        myAgent.send(reply);
+                        break;
+
                     default:
                         System.out.println("WORKER: unknown message");
                 }
