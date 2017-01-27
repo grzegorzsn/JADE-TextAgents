@@ -34,7 +34,7 @@ public class OutputGUI extends DataContainer {
             }
         });
     }
-    public static String colorTextData(String Data, JTextPane panel)
+    public void colorTextData(String Data, JTextPane panel)
     {
         int counter = 0;
         Scanner scanner = new Scanner(Data);
@@ -64,8 +64,6 @@ public class OutputGUI extends DataContainer {
             counter++;
         }
         scanner.close();
-
-        return Data;
     }
 
     public void showOutput() {
