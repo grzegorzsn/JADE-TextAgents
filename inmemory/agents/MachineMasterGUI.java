@@ -24,6 +24,10 @@ public class MachineMasterGUI extends DataContainer{
     private JRadioButton path;
     private JProgressBar progressBar1;
     private JButton wczytajPlikButton;
+    private JRadioButton ACradiobutton;
+    private JRadioButton inMemoryRadio;
+    private JLabel AhoCorasickLabel;
+    private JLabel InMemoryLabel;
     private JButton button1;
     private MachineMaster myAgent;
     private static JFrame frame;
@@ -110,19 +114,18 @@ public class MachineMasterGUI extends DataContainer{
                 {
                     szukaneSłowaRozdzielTextField.setText("szukane słowa rozdziel \" ; \"");
                 }
-
             }
         });
+
         Dalej.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fileOutput = urlTXT.getText();
+                getTextFromURL = urlTXT.getText();
                 String path = file.getAbsolutePath();
-                requestedData = szukaneSłowaRozdzielTextField.getText().split(";");
-                myAgent.manageJob(path, requestedData);
+                searchedWords = szukaneSłowaRozdzielTextField.getText().split(";");
+                myAgent.manageJob(path, searchedWords);
             }
         });
-
     }
 
     public void showGui() {

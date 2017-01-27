@@ -39,8 +39,8 @@ public class MachineMaster extends Agent {
     private boolean jobProcessing = false;
     private OutputGUI resultsGui;
     private Random random = new Random();
-    private boolean inmmemory = false; // TODO GUI radiobutton needed.
-    private StringBuilder fullText = new StringBuilder();
+    private boolean inmmemory = true; // TODO GUI radiobutton needed.
+    private StringBuilder fullText;
 
     // Put agent initializations here
     protected void setup() {
@@ -338,7 +338,7 @@ public class MachineMaster extends Agent {
         Collections.sort(partsProcessed);
 
         DataContainer.foundLines = new ArrayList<Integer>();
-
+        fullText = new StringBuilder();
         System.out.println("MASTER: job done, parts sorted.");
         for(TextJobPart part : partsProcessed) {
             fullText.append(part.getLines().toString());
