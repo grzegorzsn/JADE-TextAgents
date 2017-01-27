@@ -38,30 +38,23 @@ public class OutputGUI extends DataContainer {
         int centerY = (int) screenSize.getHeight() / 2;
 
         frame.setLocation(centerX - frame.getWidth() / 2, centerY - frame.getHeight() / 2);
-        frame.setResizable(true);
+        frame.setResizable(false);
 
         textArea.append(TextToParse);
         textArea.setEditable(false);
 
+
         JScrollPane scrollPane = new JScrollPane(textArea);
-        //scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setBounds(0, 0, 500, 400);
+        scrollPane.setBounds(0, 0, 800, 600);
         JPanel contentPane = new JPanel(null);
-        contentPane.setPreferredSize(new Dimension(500, 400));
+        contentPane.setPreferredSize(new Dimension(800, 600));
         contentPane.add(scrollPane);
         frame.setContentPane(contentPane);
         frame.pack();
         frame.setVisible(true);
 
-
-
-        /*JScrollPane scroll = new JScrollPane(scrollBar1);
-        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setVisible(true);
-        scroll.setEnabled(true);
-
-        textArea.add(scroll);*/
     }
 
 

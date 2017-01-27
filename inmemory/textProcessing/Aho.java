@@ -1,5 +1,7 @@
 package inmemory.textProcessing;
 
+import inmemory.DataContainer;
+
 import java.util.*;
 
 
@@ -10,8 +12,11 @@ public class Aho {
     protected int numStates;
     protected state zeroState;
     protected boolean verbose;
-    public int lineCount = 0;
-    ArrayList<Integer> results = new ArrayList<Integer>();
+    private int lineCount = 0;
+    private int wordIndexStart = 0;
+    private ArrayList<Integer> results = new ArrayList<Integer>();
+    private ArrayList<Integer> wordStart = new ArrayList<Integer>();
+    private ArrayList<Integer> wordEnd = new ArrayList<Integer>();
 
     protected class state{
         private int id;
@@ -157,18 +162,24 @@ public class Aho {
     protected ArrayList<Integer> search(String searchText, boolean isCaseSensitive){
         LinkedList<String> out = new LinkedList<String>();
         results.clear();
+        wordIndexStart = 0;
         state currState = zeroState;
         for(int i=0; i<searchText.length(); i++){
             char cc = searchText.charAt(i);
             while(currState.getId() != 0 && !getMatchChar(currState,cc,isCaseSensitive)){
                 if (currState.getId() == 0)
                     currState = zeroState;
-                else
+                else {
                     currState = stateMap.get(Failure.get(currState.getId()));
+                }
+
             }
+
             if(cc == '\n') {
                 lineCount++;
+                wordIndexStart = -1;
             }
+
 
 
             if(getMatchChar(currState,cc,isCaseSensitive)){
@@ -183,18 +194,25 @@ public class Aho {
                     currState = tmpState;
             }
             else{
-                if(currState.getId() == 0)
+                //NIE PASUJE
+                if(currState.getId() == 0) {
                     currState = zeroState;
+                }
                 else
-                if(verbose) System.out.print("Something wrong...\n");
+                    if(verbose) System.out.print("Something wrong...\n");
             }
+
             if(verbose) System.out.print(currState.getId() + "=>");
             if (Output.containsKey(currState.getId())){
                 out.addAll(Output.get(currState.getId()));
                 results.add(lineCount);
-                //System.out.println(lineCount + searchText);
+                wordStart.add(wordIndexStart-(Output.get(currState.getId()).getFirst().length()-1));
+                wordEnd.add(wordIndexStart);
             }
+            wordIndexStart++;
         }
+        DataContainer.wordIndexStart = wordStart;
+        DataContainer.wordIndexStop = wordEnd;
         return results;
     }
 }
