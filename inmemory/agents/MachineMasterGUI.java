@@ -17,6 +17,7 @@ import java.util.Collections;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.xml.crypto.Data;
 
 /**
  * Created by Grzegorz&Krzysztof on 2017-01-23.
@@ -129,6 +130,7 @@ public class MachineMasterGUI extends DataContainer{
         Dalej.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                DataContainer.wipeOut();
                 searchedWords = szukaneSłowaRozdzielTextField.getText().split(";");
                 getTextFromURL = urlTXT.getText();
                 if(URLradiobutton.isSelected())

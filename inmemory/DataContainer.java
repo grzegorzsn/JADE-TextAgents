@@ -19,4 +19,15 @@ public class DataContainer {
         }
         System.out.print(TextToParse);
     }
+
+    public static void wipeOut()
+    {
+        searchedWords = null;
+        getTextFromURL = "";
+        TextToParse = "";
+        foundLines = new ArrayList<>();
+        wordIndexStart= new ArrayList<>();
+        wordIndexStop= new ArrayList<>();
+        urlLinesNumber = 0;
+    }
 }

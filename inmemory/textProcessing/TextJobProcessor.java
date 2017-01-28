@@ -69,8 +69,8 @@ public class TextJobProcessor {
         int offset = 0;
         for (int i = 0; i < lines.length; i++) {
             if (linesCounter >= numberOfLinesInFragment) {
-                parts[currentFragmentSave].setOffset(offset);
                 currentFragmentSave++;
+                parts[currentFragmentSave].setOffset(offset);
                 linesCounter = 0;
             }
             System.out.println(offset);

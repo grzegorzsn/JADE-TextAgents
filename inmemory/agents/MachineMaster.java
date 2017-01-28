@@ -320,28 +320,28 @@ public class MachineMaster extends Agent {
 
     private void manageJobProcessed()
     {
-        Collections.sort(partsProcessed);
+            Collections.sort(partsProcessed);
 
-        DataContainer.foundLines = new ArrayList<Integer>();
-        DataContainer.wordIndexStart = new ArrayList<Integer>();
-        DataContainer.wordIndexStop = new ArrayList<Integer>();
+            DataContainer.foundLines = new ArrayList<Integer>();
+            DataContainer.wordIndexStart = new ArrayList<Integer>();
+            DataContainer.wordIndexStop = new ArrayList<Integer>();
 
-        fullText = new StringBuilder();
-        System.out.println("MASTER: job done, parts sorted.");
-        for(TextJobPart part : partsProcessed) {
-            fullText.append(part.getLines().toString());
+            fullText = new StringBuilder();
+            System.out.println("MASTER: job done, parts sorted.");
+            for(TextJobPart part : partsProcessed) {
+                fullText.append(part.getLines().toString());
 
-            DataContainer.foundLines.addAll(part.getResults());
-            DataContainer.wordIndexStart.addAll(part.wordStart);
-            DataContainer.wordIndexStop.addAll(part.wordLength);
+                DataContainer.foundLines.addAll(part.getResults());
+                DataContainer.wordIndexStart.addAll(part.wordStart);
+                DataContainer.wordIndexStop.addAll(part.wordLength);
+            }
+
+            DataContainer.TextToParse = fullText.toString();
+
+            resultsGui = new OutputGUI();
+            resultsGui.showOutput();
+            DataContainer.wipeOut();
         }
-
-        DataContainer.TextToParse = fullText.toString();
-
-        resultsGui = new OutputGUI();
-        resultsGui.showOutput();
-
-    }
 
 
 

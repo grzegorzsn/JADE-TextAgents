@@ -57,6 +57,7 @@ public class OutputGUI extends DataContainer {
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
+        //DataContainer.wipeOut();
         /*while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
 
