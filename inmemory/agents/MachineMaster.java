@@ -42,20 +42,17 @@ public class MachineMaster extends Agent {
     private boolean inmmemory = true;
     private StringBuilder fullText;
 
-    // Put agent initializations here
     protected void setup() {
-        // Create and show the GUI
         myGui = new MachineMasterGUI(this);
         myGui.showGui();
         System.out.println("MachineMaster "+getAID().getName()+" HERE I AM.");
 
-        // Register the service in the yellow pages
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
         ServiceDescription sd = new ServiceDescription();
         sd.setType("text-jobs");
         sd.setName("text-jobs-master");
-        //sd.setName("text-jobs-master");
+
         dfd.addServices(sd);
         try {
             DFService.register(this, dfd);
@@ -64,20 +61,13 @@ public class MachineMaster extends Agent {
             fe.printStackTrace();
         }
 
-        // Add the behaviour
         addBehaviour(new refreshWorkersPeriodically(this, 1000));
         addBehaviour(new refreshWorkersOnMachinePeriodically(this, 1000));
 
-        //  Add the behaviour
-         //addBehaviour(new sendJobsBehaviour());
-
-         addBehaviour(new listener());
+        addBehaviour(new listener());
     }
 
-
-    // Put agent clean-up operations here
     protected void takeDown() {
-        // Deregister from the yellow pages
         try {
             DFService.deregister(this);
         }
@@ -226,8 +216,7 @@ public class MachineMaster extends Agent {
                 System.out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
                 return;
             }
-            int nrOfWorkers = workersOnPlatform.length;
-            int currentWorker = 0;
+
             for(AID workerAID : workersOnPlatform)
             {
                 ACLMessage request = new ACLMessage(ACLMessage.REQUEST);

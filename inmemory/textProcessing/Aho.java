@@ -159,7 +159,6 @@ public class Aho {
         }
         return matchChar;
     }
-    //protected LinkedList<String> search(String searchText, boolean isCaseSensitive){
     protected void search(TextJobPart jobPart, boolean isCaseSensitive){
         String searchText = jobPart.getLines().toString();
         LinkedList<String> out = new LinkedList<String>();
@@ -194,7 +193,6 @@ public class Aho {
                     currState = tmpState;
             }
             else{
-                //NIE PASUJE
                 if(currState.getId() == 0) {
                     currState = zeroState;
                 }
@@ -218,6 +216,5 @@ public class Aho {
         jobPart.wordStart = wordStart;
         jobPart.wordLength = wordEnd;
         System.out.println("AHO - How many words found: "+wordFounded);
-        //return results;
     }
 }

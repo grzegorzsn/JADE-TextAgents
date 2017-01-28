@@ -15,20 +15,14 @@ public class TextJobProcessor {
 
 
     public static ArrayList<TextJobPart> loadParts(String filePath, String[] input) {
-        //CO ILE LINII DZIELIC TEKST | liczba linii / liczba agentow (zaokragl w gore)
         float numberOfLinesInFragment = (float) 100;
-        //ile lini w pliku (potrzebne do stworzenia arraya fragmentow o odpowiedniej wielkosci)
         long linesNumber = 0;
-        //linie tekstu
         String[] lines = null;
 
         int linesCounter = 0;
-        //do ktorego indeksu arraya ma zapisywac
         int currentFragmentSave = 0;
-        //parts tekstu
         TextJobPart[] parts = null;
 
-        //CZYTANIE PLIKU
         StringBuilder everything = new StringBuilder();
         BufferedReader br = null;
         String line;
