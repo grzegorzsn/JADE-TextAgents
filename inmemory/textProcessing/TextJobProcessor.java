@@ -75,7 +75,7 @@ public class TextJobProcessor {
         return partsArray;
     }
 
-    public static TextJobPart process(TextJobPart part)
+    public static TextJobPart processAho(TextJobPart part)
     {
         Aho sm = new Aho(false);
         sm.createTrie(part.getInput());

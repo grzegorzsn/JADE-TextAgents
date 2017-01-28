@@ -39,7 +39,7 @@ public class MachineMaster extends Agent {
     private boolean jobProcessing = false;
     private OutputGUI resultsGui;
     private Random random = new Random();
-    private boolean inmmemory = true; // TODO GUI radiobutton needed.
+    private boolean inmmemory = true;
     private StringBuilder fullText;
 
     // Put agent initializations here
@@ -91,20 +91,6 @@ public class MachineMaster extends Agent {
     }
 
     public void manageJob(String path, String[] input) {
-
-        /*  TODO
-            According to inmmemory flag,
-            jobs should be processed on the same machine or on other machines.
-            To simplify machine may be understood as single container.
-
-            If inmemory is true workers from other machines should be invited to machine of master.
-            Then workers on machine should be asked to process parts of job.
-
-            Else job parts should be sent to workers on other machines.
-            In this case job parts must not be processed on the machine, which contains master.
-            */
-
-
         partsToProcess = TextJobProcessor.loadParts(path, input);
         partsProcessed = new ArrayList<TextJobPart>();
         for (TextJobPart part : partsToProcess)
