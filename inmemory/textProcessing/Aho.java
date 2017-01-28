@@ -15,8 +15,8 @@ public class Aho {
     private int lineCount = 0;
     private int wordIndexStart = 0;
     private ArrayList<Integer> results = new ArrayList<Integer>();
-    private static ArrayList<Integer> wordStart = new ArrayList<Integer>();
-    private static ArrayList<Integer> wordEnd = new ArrayList<Integer>();
+    private ArrayList<Integer> wordStart = new ArrayList<Integer>();
+    private ArrayList<Integer> wordEnd = new ArrayList<Integer>();
     private int wordFounded = 0;
 
     protected class state{

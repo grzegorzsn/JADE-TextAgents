@@ -12,25 +12,21 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Collections;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.xml.crypto.Data;
 
 /**
  * Created by Grzegorz&Krzysztof on 2017-01-23.
  */
 public class MachineMasterGUI extends DataContainer{
-    private JTextField szukaneSłowaRozdzielTextField;
-    private JButton Dalej;
+    private JTextField searcherdWordsSplittedTextField;
+    private JButton Next;
     private JPanel machineMasterGUIPanel;
     private JTextField urlTXT;
     private JRadioButton URLradiobutton;
     private JRadioButton path;
-    private JProgressBar progressBar1;
-    private JButton wczytajPlikButton;
+    private JButton loadFileButton;
     private JRadioButton ACradiobutton;
     private JRadioButton inMemoryRadio;
     private JLabel AhoCorasickLabel;
@@ -43,7 +39,7 @@ public class MachineMasterGUI extends DataContainer{
     MachineMasterGUI(MachineMaster a)
     {
         myAgent = a;
-        wczytajPlikButton.addActionListener(new ActionListener() {
+        loadFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileopen = new JFileChooser();
@@ -62,13 +58,13 @@ public class MachineMasterGUI extends DataContainer{
             public void actionPerformed(ActionEvent e) {
                 if(path.isSelected())
                 {
-                    wczytajPlikButton.setEnabled(true);
+                    loadFileButton.setEnabled(true);
                     urlTXT.setEnabled(false);
                     URLradiobutton.setSelected(false);
                 }
                 else
                 {
-                    wczytajPlikButton.setEnabled(false);
+                    loadFileButton.setEnabled(false);
                 }
             }
         });
@@ -77,7 +73,7 @@ public class MachineMasterGUI extends DataContainer{
             public void actionPerformed(ActionEvent e) {
                 if(URLradiobutton.isSelected())
                 {
-                    wczytajPlikButton.setEnabled(false);
+                    loadFileButton.setEnabled(false);
                     urlTXT.setEnabled(true);
                     path.setSelected(false);
                 }
@@ -107,31 +103,31 @@ public class MachineMasterGUI extends DataContainer{
             }
         });
 
-        szukaneSłowaRozdzielTextField.addFocusListener(new FocusAdapter() {
+        searcherdWordsSplittedTextField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-                if (szukaneSłowaRozdzielTextField.getText().equals("szukane słowa rozdziel \" ; \""))
+                if (searcherdWordsSplittedTextField.getText().equals("szukane słowa rozdziel \" ; \""))
                 {
-                    szukaneSłowaRozdzielTextField.setText("");
+                    searcherdWordsSplittedTextField.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                if (szukaneSłowaRozdzielTextField.getText().equals(""))
+                if (searcherdWordsSplittedTextField.getText().equals(""))
                 {
-                    szukaneSłowaRozdzielTextField.setText("szukane słowa rozdziel \" ; \"");
+                    searcherdWordsSplittedTextField.setText("szukane słowa rozdziel \" ; \"");
                 }
             }
         });
 
-        Dalej.addActionListener(new ActionListener() {
+        Next.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DataContainer.wipeOut();
-                searchedWords = szukaneSłowaRozdzielTextField.getText().split(";");
+                searchedWords = searcherdWordsSplittedTextField.getText().split(";");
                 getTextFromURL = urlTXT.getText();
                 if(URLradiobutton.isSelected())
                 {
@@ -151,7 +147,6 @@ public class MachineMasterGUI extends DataContainer{
                             urlLinesNumber++;
                         }
                         br.close();
-                        System.out.println(fullText);
                         myAgent.manageJob(fullText.toString(), searchedWords);
                     } catch (MalformedURLException re) {
                         re.printStackTrace();

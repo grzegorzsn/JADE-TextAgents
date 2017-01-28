@@ -18,7 +18,7 @@
           <grid row="3" column="16" row-span="7" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <component id="1e718" class="javax.swing.JTextField" binding="szukaneSłowaRozdzielTextField" default-binding="true">
+      <component id="1e718" class="javax.swing.JTextField" binding="searcherdWordsSplittedTextField">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -75,7 +75,7 @@
           <text value="wpisz adress url..."/>
         </properties>
       </component>
-      <component id="dc2ce" class="javax.swing.JButton" binding="Dalej">
+      <component id="dc2ce" class="javax.swing.JButton" binding="Next">
         <constraints>
           <grid row="5" column="12" row-span="3" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -83,13 +83,7 @@
           <text value="Dalej"/>
         </properties>
       </component>
-      <component id="99bc2" class="javax.swing.JProgressBar" binding="progressBar1" default-binding="true">
-        <constraints>
-          <grid row="7" column="1" row-span="2" col-span="3" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="f4ce8" class="javax.swing.JButton" binding="wczytajPlikButton" default-binding="true">
+      <component id="f4ce8" class="javax.swing.JButton" binding="loadFileButton">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

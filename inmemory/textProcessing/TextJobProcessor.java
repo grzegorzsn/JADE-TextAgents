@@ -16,7 +16,7 @@ public class TextJobProcessor {
 
     public static ArrayList<TextJobPart> loadParts(String filePath, String[] input) {
         //CO ILE LINII DZIELIC TEKST | liczba linii / liczba agentow (zaokragl w gore)
-        float numberOfLinesInFragment = (float) 10.0;
+        float numberOfLinesInFragment = (float) 100;
         //ile lini w pliku (potrzebne do stworzenia arraya fragmentow o odpowiedniej wielkosci)
         long linesNumber = 0;
         //linie tekstu
