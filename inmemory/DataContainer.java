@@ -9,6 +9,9 @@ public class DataContainer {
     public static ArrayList<Integer> foundLines;
     public static ArrayList<Integer> wordIndexStart;
     public static ArrayList<Integer> wordIndexStop;
+    public static boolean fileFlag;
+    public static boolean urlFlag;
+    public static int urlLinesNumber;
 
     public static void PrintDataToConsole() {
         for(int p : foundLines) {

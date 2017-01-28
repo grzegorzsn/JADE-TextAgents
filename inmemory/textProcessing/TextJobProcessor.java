@@ -1,5 +1,7 @@
 package inmemory.textProcessing;
 
+import inmemory.DataContainer;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -29,14 +31,21 @@ public class TextJobProcessor {
         //CZYTANIE PLIKU
         StringBuilder everything = new StringBuilder();
         BufferedReader br = null;
+        String line;
         try {
+            if(new DataContainer().fileFlag){
             br = new BufferedReader(new FileReader(filePath));
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                everything.append(line + "\n");
-                linesNumber++;
+                while ((line = br.readLine()) != null) {
+                    everything.append(line + "\n");
+                    linesNumber++;
+                }
             }
+            else if(new DataContainer().urlFlag)
+            {
+                everything = new StringBuilder(filePath);
+                linesNumber = new DataContainer().urlLinesNumber;
+            }
+
             lines = everything.toString().split("\\n");
             parts = new TextJobPart[(int) Math.ceil(linesNumber / numberOfLinesInFragment)];
 
