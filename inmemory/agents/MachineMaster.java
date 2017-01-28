@@ -109,7 +109,6 @@ public class MachineMaster extends Agent {
     }
 
     private class sendPartsToWorkers extends Behaviour {
-
         public void action() {
             if(workersOnPlatform == null || workersOnPlatform.length < 1)
             {

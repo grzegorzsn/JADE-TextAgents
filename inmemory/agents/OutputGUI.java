@@ -42,10 +42,7 @@ public class OutputGUI extends DataContainer {
         StyledDocument doc = panel.getStyledDocument();
         Style style = panel.addStyle("I'm a Style", null);
         String wordToChange;
-
-
         try {
-
             doc.insertString(0, Data, style);
             StyleConstants.setForeground(style, Color.red);
             System.out.println(doc.getLength());
@@ -56,13 +53,10 @@ public class OutputGUI extends DataContainer {
                 System.out.println("Word to change: " + wordToChange + " IT IS FROM: "+wordIndexStart.get(i));
                 doc.remove(wordIndexStart.get(i), wordIndexStop.get(i));
                 doc.insertString(wordIndexStart.get(i), wordToChange, style);
-
             }
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
-
-
         /*while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
 

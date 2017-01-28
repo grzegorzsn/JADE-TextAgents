@@ -5,7 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JFileChooser;
@@ -28,6 +34,7 @@ public class MachineMasterGUI extends DataContainer{
     private JRadioButton inMemoryRadio;
     private JLabel AhoCorasickLabel;
     private JLabel InMemoryLabel;
+    private JLabel selectedFile;
     private JButton button1;
     private MachineMaster myAgent;
     private static JFrame frame;
@@ -44,6 +51,8 @@ public class MachineMasterGUI extends DataContainer{
                 int ret = fileopen.showDialog(null, "Open file");
                 if (ret == JFileChooser.APPROVE_OPTION) {
                     file = fileopen.getSelectedFile();
+                    String fileName = file.toString().substring(file.toString().lastIndexOf("\\"), file.toString().length());
+                    selectedFile.setText(fileName.substring(1,fileName.length()));
                     //System.out.println(file);//zwraca plik ktory wybralismy
             }}
         });
@@ -120,10 +129,44 @@ public class MachineMasterGUI extends DataContainer{
         Dalej.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getTextFromURL = urlTXT.getText();
-                String path = file.getAbsolutePath();
                 searchedWords = szukaneSłowaRozdzielTextField.getText().split(";");
-                myAgent.manageJob(path, searchedWords);
+                getTextFromURL = urlTXT.getText();
+                if(URLradiobutton.isSelected())
+                {
+                    urlFlag = true;
+                    URL url;
+                    try {
+                        String urlString=urlTXT.getText();
+                        url = new URL(urlString);
+                        URLConnection conn = url.openConnection();
+                        BufferedReader br = new BufferedReader(
+                                new InputStreamReader(conn.getInputStream()));
+                        StringBuilder fullText = new StringBuilder();
+                        String inputLine;
+                        while ((inputLine = br.readLine()) != null) {
+                            fullText.append(inputLine);
+                            fullText.append("\n");
+                            urlLinesNumber++;
+                        }
+                        br.close();
+                        System.out.println(fullText);
+                        myAgent.manageJob(fullText.toString(), searchedWords);
+                    } catch (MalformedURLException re) {
+                        re.printStackTrace();
+                    } catch (IOException re) {
+                        re.printStackTrace();
+                    }
+                }
+
+                else if (path.isSelected()) {
+                    fileFlag=true;
+                    String path = file.getAbsolutePath();
+                    myAgent.manageJob(path, searchedWords);
+                }
+                else
+                {
+                    System.out.println("Nie wybrano żadnej akcji!");
+                }
             }
         });
     }
