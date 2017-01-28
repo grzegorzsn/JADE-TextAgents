@@ -13,14 +13,18 @@ import java.util.ArrayList;
  * Time: 02:16
  * To change this template use File | Settings | File Templates.
  */
-public class TextJobPart implements Comparable, Serializable {
 
+
+public class TextJobPart implements Comparable, Serializable {
+    private boolean aho;
     private int numberInQueue = 0; //numer fragmentu
     private int offset = 0; //numer startowej linii
     StringBuilder lines; //tekst
     ArrayList<Integer> results = new ArrayList<Integer>();
     private String[] input;
     private int id = 0;
+
+
 
     public ArrayList<Integer> wordStart = new ArrayList<Integer>();
     public ArrayList<Integer> wordLength = new ArrayList<Integer>();
@@ -76,4 +80,13 @@ public class TextJobPart implements Comparable, Serializable {
         TextJobPart other = ((TextJobPart)o);
         return this.numberInQueue > other.numberInQueue ? +1 : this.numberInQueue < other.numberInQueue ? -1 : 0;
     }
+
+    public boolean isAho() {
+        return aho;
+    }
+
+    public void setAho(boolean aho) {
+        this.aho = aho;
+    }
+
 }

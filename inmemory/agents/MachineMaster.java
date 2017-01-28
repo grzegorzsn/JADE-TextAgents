@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import static java.lang.System.*;
 import static java.lang.Thread.sleep;
 
 /**
@@ -41,11 +42,12 @@ public class MachineMaster extends Agent {
     private Random random = new Random();
     private boolean inmmemory;
     private StringBuilder fullText;
+    private long timestamp;
 
     protected void setup() {
         myGui = new MachineMasterGUI(this);
         myGui.showGui();
-        System.out.println("MachineMaster "+getAID().getName()+" HERE I AM.");
+        out.println("MachineMaster "+getAID().getName()+" HERE I AM.");
 
         DFAgentDescription dfd = new DFAgentDescription();
         dfd.setName(getAID());
@@ -77,11 +79,16 @@ public class MachineMaster extends Agent {
         // Close the GUI
         myGui.close();
         // Printout a dismissal message
-        System.out.println("MachineMaster "+getAID().getName()+" terminating.");
+        out.println("MachineMaster "+getAID().getName()+" terminating.");
     }
 
     public void manageJob(String path, String[] input) {
-        partsToProcess = TextJobProcessor.loadParts(path, input);
+        if(myGui.ACradiobutton.isSelected())
+            out.println("MASTER: started processing job using Aho-Corasick");
+        else
+            out.println("MASTER: started processing job using standard find function");
+        timestamp = nanoTime();
+        partsToProcess = TextJobProcessor.loadParts(path, input, myGui.ACradiobutton.isSelected());
         partsProcessed = new ArrayList<TextJobPart>();
         for (TextJobPart part : partsToProcess)
             part.setId(random.nextInt());
@@ -94,15 +101,47 @@ public class MachineMaster extends Agent {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        timestamp = nanoTime();
         addBehaviour(new sendPartsToWorkers());
         addBehaviour(new listener());
     }
+
+
+    private void manageJobProcessed()
+    {
+        Collections.sort(partsProcessed);
+
+        DataContainer.foundLines = new ArrayList<Integer>();
+        DataContainer.wordIndexStart = new ArrayList<Integer>();
+        DataContainer.wordIndexStop = new ArrayList<Integer>();
+
+        fullText = new StringBuilder();
+        out.println("MASTER: job done, parts sorted.");
+        for(TextJobPart part : partsProcessed) {
+            fullText.append(part.getLines().toString());
+
+            DataContainer.foundLines.addAll(part.getResults());
+            DataContainer.wordIndexStart.addAll(part.wordStart);
+            DataContainer.wordIndexStop.addAll(part.wordLength);
+        }
+        DataContainer.TextToParse = fullText.toString();
+        long processingTime = nanoTime() - timestamp;
+        double processingTimeSecs = processingTime / 1000000000.0;
+        if(myGui.ACradiobutton.isSelected())
+            out.println("MASTER: job finished wtih AhoCorasick after: " + processingTimeSecs + "s" );
+        else
+            out.println("MASTER: job finished wtih find function after: " + processingTimeSecs +"s" );
+        resultsGui = new OutputGUI();
+        resultsGui.showOutput();
+        DataContainer.wipeOut();
+    }
+
 
     private class sendPartsToWorkers extends Behaviour {
         public void action() {
             if(workersOnPlatform == null || workersOnPlatform.length < 1)
             {
-                System.out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
+                out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
                 return;
             }
             ArrayList<AID> receivers;
@@ -126,7 +165,7 @@ public class MachineMaster extends Agent {
                     e.printStackTrace();
                 }
                 request.setConversationId("text-jobs-request");
-                request.setReplyWith("request" + System.currentTimeMillis()); // Unique value
+                request.setReplyWith("request" + currentTimeMillis()); // Unique value
                 request.setContent(content);
                 myAgent.send(request);
                 currentWorker++;
@@ -153,7 +192,7 @@ public class MachineMaster extends Agent {
                 workersOnPlatform = new AID[result.length];
                 for (int i = 0; i < result.length; ++i) {
                     workersOnPlatform[i] = result[i].getName();
-                    System.out.println("Worker "+workersOnPlatform[i]);
+                    out.println("Worker "+workersOnPlatform[i]);
                 }
             }
             catch (FIPAException fe) {
@@ -173,7 +212,7 @@ public class MachineMaster extends Agent {
             workersOutsideMachine = new ArrayList<AID>();
             if(workersOnPlatform == null || workersOnPlatform.length < 1)
             {
-                System.out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
+                out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
                 return;
             }
             for(AID workerAID : workersOnPlatform)
@@ -213,7 +252,7 @@ public class MachineMaster extends Agent {
         public void action() {
             if(workersOnPlatform == null || workersOnPlatform.length < 1)
             {
-                System.out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
+                out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
                 return;
             }
 
@@ -251,7 +290,7 @@ public class MachineMaster extends Agent {
                 switch (ont)
                 {
                     case "text-jobs-job-result":
-                        System.out.println("MASTER: Result received");
+                        out.println("MASTER: Result received");
                         break;
 
                     case "text-job-inivitation-accepted":
@@ -268,7 +307,7 @@ public class MachineMaster extends Agent {
                         } catch (ClassNotFoundException e) {
                             e.printStackTrace();
                         }
-                        System.out.println("MASTER: Part received: " +  part.getResults());
+                        out.println("MASTER: Part received: " +  part.getResults());
                         partsProcessed.add(part); // TODO verify part is correctly processed.
                         if(checkJobProcessed()) manageJobProcessed();
                         break;
@@ -288,7 +327,7 @@ public class MachineMaster extends Agent {
                         break;
 
                     default:
-                        System.out.println("MASTER: Unknown message received");
+                        out.println("MASTER: Unknown message received");
                 }
             }
             addBehaviour(new listener());
@@ -306,31 +345,6 @@ public class MachineMaster extends Agent {
         return partsProcessed.size() == partsToProcess.size();
 
     }
-
-    private void manageJobProcessed()
-    {
-            Collections.sort(partsProcessed);
-
-            DataContainer.foundLines = new ArrayList<Integer>();
-            DataContainer.wordIndexStart = new ArrayList<Integer>();
-            DataContainer.wordIndexStop = new ArrayList<Integer>();
-
-            fullText = new StringBuilder();
-            System.out.println("MASTER: job done, parts sorted.");
-            for(TextJobPart part : partsProcessed) {
-                fullText.append(part.getLines().toString());
-
-                DataContainer.foundLines.addAll(part.getResults());
-                DataContainer.wordIndexStart.addAll(part.wordStart);
-                DataContainer.wordIndexStop.addAll(part.wordLength);
-            }
-
-            DataContainer.TextToParse = fullText.toString();
-
-            resultsGui = new OutputGUI();
-            resultsGui.showOutput();
-            DataContainer.wipeOut();
-        }
 
 
 

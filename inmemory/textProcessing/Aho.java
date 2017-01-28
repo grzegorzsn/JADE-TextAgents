@@ -179,8 +179,6 @@ public class Aho {
                 lineCount++;
             }
 
-
-
             if(getMatchChar(currState,cc,isCaseSensitive)){
                 state tmpState = stateMap.get(currState.nextStates.get(cc));
                 if (!isCaseSensitive && tmpState == null){
@@ -204,10 +202,6 @@ public class Aho {
             if (Output.containsKey(currState.getId())){
                 out.addAll(Output.get(currState.getId()));
                 results.add(lineCount);
-
-                System.out.println("AHO - Word found at index: "+(jobPart.getOffset()+i-(Output.get(currState.getId()).getFirst().length()-1)));
-                System.out.println("AHO - Offset: "+jobPart.getOffset());
-
                 wordStart.add(jobPart.getOffset()+i-(Output.get(currState.getId()).getFirst().length()-1));
                 wordEnd.add(Output.get(currState.getId()).getFirst().length());
                 wordFounded++;
@@ -215,6 +209,5 @@ public class Aho {
         }
         jobPart.wordStart = wordStart;
         jobPart.wordLength = wordEnd;
-        System.out.println("AHO - How many words found: "+wordFounded);
     }
 }

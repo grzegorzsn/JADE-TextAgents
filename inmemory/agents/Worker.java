@@ -73,7 +73,11 @@ public class Worker extends Agent {
                         } catch (ClassNotFoundException e) {
                             e.printStackTrace();
                         }
-                        TextJobPart processedPart = TextJobProcessor.processAho(part);
+                        TextJobPart processedPart;
+                        if(part.isAho())
+                            processedPart = TextJobProcessor.processAho(part);
+                        else
+                            processedPart = TextJobProcessor.processFind(part);
                         reply.setContent(myAgent.getName());
                         reply.setOntology("text-job-processed-part");
                         try {

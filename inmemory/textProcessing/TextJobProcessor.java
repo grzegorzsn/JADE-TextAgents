@@ -14,7 +14,7 @@ public class TextJobProcessor {
 
 
 
-    public static ArrayList<TextJobPart> loadParts(String filePath, String[] input) {
+    public static ArrayList<TextJobPart> loadParts(String filePath, String[] input, boolean aho) {
         float numberOfLinesInFragment = (float) 100;
         long linesNumber = 0;
         String[] lines = null;
@@ -58,6 +58,7 @@ public class TextJobProcessor {
             parts[i] = new TextJobPart();
             parts[i].setNumber(i);
             parts[i].setInput(input);
+            parts[i].setAho(aho);
         }
 
         int offset = 0;
@@ -67,7 +68,6 @@ public class TextJobProcessor {
                 parts[currentFragmentSave].setOffset(offset);
                 linesCounter = 0;
             }
-            System.out.println(offset);
             offset += lines[i].length()+1;
             parts[currentFragmentSave].addLine(lines[i] + "\n");
             linesCounter++;
@@ -90,6 +90,16 @@ public class TextJobProcessor {
 
     public static TextJobPart processFind(TextJobPart part)
     {
+        String allText = part.getLines().toString();
+        part.wordLength = new ArrayList<>();
+        part.wordStart = new ArrayList<>();
+        for (String searchedWord : part.getInput()) {
+            for (int i = -1; (i = allText.indexOf(searchedWord, i + 1)) != -1; ) {
+                part.wordStart.add(i + part.getOffset());
+                part.wordLength.add(searchedWord.length());
+            }
+        }
+
         // TODO create processing with find instead of Aho-Corasick
         return part;
     }

@@ -35,11 +35,8 @@ public class OutputGUI extends DataContainer {
         try {
             doc.insertString(0, Data, style);
             StyleConstants.setForeground(style, Color.red);
-            System.out.println(doc.getLength());
-            System.out.println("GUI - How many words found: "+wordIndexStart.size());
             for(int i=0; i<wordIndexStart.size(); i++) {
                 wordToChange = doc.getText(wordIndexStart.get(i), wordIndexStop.get(i));
-                System.out.println("Word to change: " + wordToChange + " IT IS FROM: "+wordIndexStart.get(i));
                 doc.remove(wordIndexStart.get(i), wordIndexStop.get(i));
                 doc.insertString(wordIndexStart.get(i), wordToChange, style);
             }
@@ -49,8 +46,6 @@ public class OutputGUI extends DataContainer {
     }
 
     public void showOutput() {
-        System.out.println("JFrame Creating.....");
-
         frame = new JFrame("Found text");
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

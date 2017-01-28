@@ -27,7 +27,7 @@ public class MachineMasterGUI extends DataContainer{
     private JRadioButton URLradiobutton;
     private JRadioButton path;
     private JButton loadFileButton;
-    private JRadioButton ACradiobutton;
+    public JRadioButton ACradiobutton;
     private JRadioButton inMemoryRadio;
     private JLabel AhoCorasickLabel;
     private JLabel InMemoryLabel;
