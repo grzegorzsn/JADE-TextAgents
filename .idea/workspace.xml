@@ -6,18 +6,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64230bb7-5ccc-4740-948d-08aa2c02649f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/BookBuyerAgent$RequestPerformer.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/BookBuyerAgent$RequestPerformer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/BookBuyerAgent.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/BookBuyerAgent.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/BookSellerAgent.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/BookSellerAgent.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$listener.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$listener.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMasterGUI$6.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMasterGUI$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMasterGUI.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMasterGUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/OutputGUI.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/OutputGUI.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/Worker$listener.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/Worker$listener.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/Worker.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/Worker.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/textProcessing/Aho.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/textProcessing/Aho.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APDescription.txt" afterPath="$PROJECT_DIR$/APDescription.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MTPs-Main-Container.txt" afterPath="$PROJECT_DIR$/MTPs-Main-Container.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inmemory/agents/MachineMaster.java" afterPath="$PROJECT_DIR$/inmemory/agents/MachineMaster.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inmemory/agents/OutputGUI.java" afterPath="$PROJECT_DIR$/inmemory/agents/OutputGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inmemory/textProcessing/Aho.java" afterPath="$PROJECT_DIR$/inmemory/textProcessing/Aho.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inmemory/textProcessing/TextJobProcessor.java" afterPath="$PROJECT_DIR$/inmemory/textProcessing/TextJobProcessor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.java" afterPath="$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/agents/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -37,14 +41,15 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TextJobPart.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TextJobPart.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/TextJobPart.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="73" column="13" lean-forward="true" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
+            <state relative-caret-position="728">
+              <caret line="73" column="13" lean-forward="false" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
               <folding>
-                <element signature="e#1547#1548#0" expanded="true" />
-                <element signature="e#1575#1576#0" expanded="true" />
+                <element signature="e#570#579#0" expanded="true" />
+                <element signature="e#691#700#0" expanded="true" />
+                <element signature="e#760#769#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -53,7 +58,7 @@
       <file leaf-file-name="TextJobProcessor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/TextJobProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
+            <state relative-caret-position="17">
               <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
@@ -63,8 +68,24 @@
       <file leaf-file-name="MachineMaster.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMaster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="69" column="31" lean-forward="false" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="31" />
+            <state relative-caret-position="301">
+              <caret line="318" column="25" lean-forward="false" selection-start-line="318" selection-start-column="19" selection-end-line="318" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#12369#12370#0" expanded="true" />
+                <element signature="e#12401#12402#0" expanded="true" />
+                <element signature="e#12452#12453#0" expanded="true" />
+                <element signature="e#12494#12495#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Worker.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/inmemory/agents/Worker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -75,11 +96,10 @@
       <file leaf-file-name="Aho.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/Aho.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-119">
-              <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+            <state relative-caret-position="204">
+              <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#532#541#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -88,12 +108,9 @@
       <file leaf-file-name="OutputGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inmemory/agents/OutputGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-612">
-              <caret line="15" column="3" lean-forward="true" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-              <folding>
-                <element signature="e#608#778#0" expanded="true" />
-                <element signature="e#777#778#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="85">
+              <caret line="15" column="3" lean-forward="false" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -111,18 +128,9 @@
       <file leaf-file-name="MachineMasterGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="31" column="36" lean-forward="true" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
-              <folding>
-                <element signature="e#1315#2109#0" expanded="true" />
-                <element signature="e#2108#2109#0" expanded="true" />
-                <element signature="e#2143#2607#0" expanded="true" />
-                <element signature="e#2606#2607#0" expanded="true" />
-                <element signature="e#2651#3107#0" expanded="true" />
-                <element signature="e#3106#3107#0" expanded="true" />
-                <element signature="e#4494#6329#0" expanded="true" />
-                <element signature="e#6328#6329#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="461">
+              <caret line="165" column="48" lean-forward="false" selection-start-line="165" selection-start-column="48" selection-end-line="165" selection-end-column="48" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -149,6 +157,7 @@
       <find>Assistant</find>
       <find>wordIndexStart</find>
       <find>print</find>
+      <find>out.pr</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -171,15 +180,15 @@
         <option value="$PROJECT_DIR$/inmemory/textProcessing/TextJob.java" />
         <option value="$PROJECT_DIR$/inmemory/agents/OutputGUI.form" />
         <option value="$PROJECT_DIR$/inmemory/agents/Worker.java" />
-        <option value="$PROJECT_DIR$/inmemory/textProcessing/TextJobPart.java" />
         <option value="$USER_HOME$/Documents/#TestFiles/small.txt" />
         <option value="$PROJECT_DIR$/inmemory/DataContainer.java" />
         <option value="$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.form" />
-        <option value="$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.java" />
         <option value="$PROJECT_DIR$/inmemory/textProcessing/TextJobProcessor.java" />
-        <option value="$PROJECT_DIR$/inmemory/agents/MachineMaster.java" />
         <option value="$PROJECT_DIR$/inmemory/agents/OutputGUI.java" />
         <option value="$PROJECT_DIR$/inmemory/textProcessing/Aho.java" />
+        <option value="$PROJECT_DIR$/inmemory/textProcessing/TextJobPart.java" />
+        <option value="$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.java" />
+        <option value="$PROJECT_DIR$/inmemory/agents/MachineMaster.java" />
       </list>
     </option>
   </component>
@@ -190,9 +199,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1912" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
+    <option name="width" value="1829" />
     <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -213,6 +222,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -350,8 +361,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -724,7 +733,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="-8" y="-8" width="1829" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -736,14 +745,13 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29078013" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29006085" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21354167" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21345836" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -754,6 +762,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -790,6 +799,10 @@
           <caret line="86" column="5" lean-forward="false" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#12369#12370#0" expanded="true" />
+            <element signature="e#12401#12402#0" expanded="true" />
+            <element signature="e#12452#12453#0" expanded="true" />
+            <element signature="e#12494#12495#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -798,10 +811,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
           <caret line="33" column="62" lean-forward="false" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
-          <folding>
-            <element signature="e#608#778#0" expanded="true" />
-            <element signature="e#777#778#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -809,16 +819,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2125">
           <caret line="125" column="27" lean-forward="false" selection-start-line="125" selection-start-column="18" selection-end-line="125" selection-end-column="27" />
-          <folding>
-            <element signature="e#1315#2109#0" expanded="true" />
-            <element signature="e#2108#2109#0" expanded="true" />
-            <element signature="e#2143#2607#0" expanded="true" />
-            <element signature="e#2606#2607#0" expanded="true" />
-            <element signature="e#2651#3107#0" expanded="true" />
-            <element signature="e#3106#3107#0" expanded="true" />
-            <element signature="e#4494#6329#0" expanded="true" />
-            <element signature="e#6328#6329#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -851,7 +852,6 @@
           <caret line="43" column="25" lean-forward="false" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#532#541#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -861,8 +861,9 @@
         <state relative-caret-position="289">
           <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
           <folding>
-            <element signature="e#1547#1548#0" expanded="true" />
-            <element signature="e#1575#1576#0" expanded="true" />
+            <element signature="e#570#579#0" expanded="true" />
+            <element signature="e#691#700#0" expanded="true" />
+            <element signature="e#760#769#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -873,6 +874,10 @@
           <caret line="86" column="5" lean-forward="false" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#12369#12370#0" expanded="true" />
+            <element signature="e#12401#12402#0" expanded="true" />
+            <element signature="e#12452#12453#0" expanded="true" />
+            <element signature="e#12494#12495#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -881,10 +886,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
           <caret line="33" column="62" lean-forward="false" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
-          <folding>
-            <element signature="e#608#778#0" expanded="true" />
-            <element signature="e#777#778#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -892,16 +894,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1938">
           <caret line="125" column="27" lean-forward="false" selection-start-line="125" selection-start-column="18" selection-end-line="125" selection-end-column="27" />
-          <folding>
-            <element signature="e#1315#2109#0" expanded="true" />
-            <element signature="e#2108#2109#0" expanded="true" />
-            <element signature="e#2143#2607#0" expanded="true" />
-            <element signature="e#2606#2607#0" expanded="true" />
-            <element signature="e#2651#3107#0" expanded="true" />
-            <element signature="e#3106#3107#0" expanded="true" />
-            <element signature="e#4494#6329#0" expanded="true" />
-            <element signature="e#6328#6329#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -934,7 +927,6 @@
           <caret line="43" column="25" lean-forward="false" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#532#541#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -944,8 +936,9 @@
         <state relative-caret-position="289">
           <caret line="21" column="27" lean-forward="true" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
           <folding>
-            <element signature="e#1547#1548#0" expanded="true" />
-            <element signature="e#1575#1576#0" expanded="true" />
+            <element signature="e#570#579#0" expanded="true" />
+            <element signature="e#691#700#0" expanded="true" />
+            <element signature="e#760#769#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -993,7 +986,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1010,7 +1002,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="44" column="63" lean-forward="false" selection-start-line="44" selection-start-column="63" selection-end-line="44" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1028,7 +1019,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1036,7 +1026,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1044,16 +1033,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
           <caret line="46" column="39" lean-forward="false" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inmemory/agents/Worker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1065,44 +1044,33 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Documents/test.txt" />
-    <entry file="file://$USER_HOME$/Documents/#TestFiles/e4xtc_a.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Documents/#TestFiles/e4xtc_a.txt" />
     <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.form">
+      <provider editor-type-id="ui-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-204">
           <caret line="3" column="10" lean-forward="false" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="ui-designer">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/Aho.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-119">
-          <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+        <state relative-caret-position="204">
+          <caret line="14" column="30" lean-forward="false" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#532#541#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/inmemory/agents/OutputGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-612">
-          <caret line="15" column="3" lean-forward="true" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-          <folding>
-            <element signature="e#608#778#0" expanded="true" />
-            <element signature="e#777#778#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="15" column="3" lean-forward="false" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1114,36 +1082,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="31" column="36" lean-forward="true" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
-          <folding>
-            <element signature="e#1315#2109#0" expanded="true" />
-            <element signature="e#2108#2109#0" expanded="true" />
-            <element signature="e#2143#2607#0" expanded="true" />
-            <element signature="e#2606#2607#0" expanded="true" />
-            <element signature="e#2651#3107#0" expanded="true" />
-            <element signature="e#3106#3107#0" expanded="true" />
-            <element signature="e#4494#6329#0" expanded="true" />
-            <element signature="e#6328#6329#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMaster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="69" column="31" lean-forward="false" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/TextJobProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="17">
           <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
@@ -1151,11 +1092,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/TextJobPart.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="73" column="13" lean-forward="true" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
+        <state relative-caret-position="728">
+          <caret line="73" column="13" lean-forward="false" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
           <folding>
-            <element signature="e#1547#1548#0" expanded="true" />
-            <element signature="e#1575#1576#0" expanded="true" />
+            <element signature="e#570#579#0" expanded="true" />
+            <element signature="e#691#700#0" expanded="true" />
+            <element signature="e#760#769#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="165" column="48" lean-forward="false" selection-start-line="165" selection-start-column="48" selection-end-line="165" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="318" column="25" lean-forward="false" selection-start-line="318" selection-start-column="19" selection-end-line="318" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#12369#12370#0" expanded="true" />
+            <element signature="e#12401#12402#0" expanded="true" />
+            <element signature="e#12452#12453#0" expanded="true" />
+            <element signature="e#12494#12495#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inmemory/agents/Worker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -129,6 +129,7 @@ public class MachineMasterGUI extends DataContainer{
                 DataContainer.wipeOut();
                 searchedWords = searcherdWordsSplittedTextField.getText().split(";");
                 getTextFromURL = urlTXT.getText();
+                myAgent.setInmmemory(inMemoryRadio.isSelected());
                 if(URLradiobutton.isSelected())
                 {
                     urlFlag = true;
@@ -162,7 +163,7 @@ public class MachineMasterGUI extends DataContainer{
                 }
                 else
                 {
-                    System.out.println("Nie wybrano żadnej akcji!");
+                    System.out.println("MASTER: Nie wybrano żadnej akcji!");
                 }
             }
         });

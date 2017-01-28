@@ -39,7 +39,7 @@ public class MachineMaster extends Agent {
     private boolean jobProcessing = false;
     private OutputGUI resultsGui;
     private Random random = new Random();
-    private boolean inmmemory = true;
+    private boolean inmmemory;
     private StringBuilder fullText;
 
     protected void setup() {
@@ -251,7 +251,7 @@ public class MachineMaster extends Agent {
                 switch (ont)
                 {
                     case "text-jobs-job-result":
-                        System.out.println("Result received");
+                        System.out.println("MASTER: Result received");
                         break;
 
                     case "text-job-inivitation-accepted":
@@ -268,7 +268,7 @@ public class MachineMaster extends Agent {
                         } catch (ClassNotFoundException e) {
                             e.printStackTrace();
                         }
-                        System.out.println("Part received: " +  part.getResults());
+                        System.out.println("MASTER: Part received: " +  part.getResults());
                         partsProcessed.add(part); // TODO verify part is correctly processed.
                         if(checkJobProcessed()) manageJobProcessed();
                         break;
@@ -344,6 +344,16 @@ public class MachineMaster extends Agent {
         }
 
     }
+
+
+    public boolean isInmmemory() {
+        return inmmemory;
+    }
+
+    public void setInmmemory(boolean inmmemory) {
+        this.inmmemory = inmmemory;
+    }
+
 
 
 }
