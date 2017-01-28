@@ -22,6 +22,9 @@ public class TextJobPart implements Comparable, Serializable {
     private String[] input;
     private int id = 0;
 
+    public ArrayList<Integer> wordStart = new ArrayList<Integer>();
+    public ArrayList<Integer> wordLength = new ArrayList<Integer>();
+
     public TextJobPart(){
         lines = new StringBuilder();
     }

@@ -324,12 +324,17 @@ public class MachineMaster extends Agent {
         Collections.sort(partsProcessed);
 
         DataContainer.foundLines = new ArrayList<Integer>();
+        DataContainer.wordIndexStart = new ArrayList<Integer>();
+        DataContainer.wordIndexStop = new ArrayList<Integer>();
+
         fullText = new StringBuilder();
         System.out.println("MASTER: job done, parts sorted.");
         for(TextJobPart part : partsProcessed) {
             fullText.append(part.getLines().toString());
 
             DataContainer.foundLines.addAll(part.getResults());
+            DataContainer.wordIndexStart.addAll(part.wordStart);
+            DataContainer.wordIndexStop.addAll(part.wordLength);
         }
 
         DataContainer.TextToParse = fullText.toString();

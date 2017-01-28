@@ -160,10 +160,10 @@ public class Aho {
         return matchChar;
     }
     //protected LinkedList<String> search(String searchText, boolean isCaseSensitive){
-    protected ArrayList<Integer> search(String searchText, boolean isCaseSensitive){
+    protected void search(TextJobPart jobPart, boolean isCaseSensitive){
+        String searchText = jobPart.getLines().toString();
         LinkedList<String> out = new LinkedList<String>();
         results.clear();
-        wordIndexStart = 0;
         state currState = zeroState;
         for(int i=0; i<searchText.length(); i++){
             char cc = searchText.charAt(i);
@@ -178,7 +178,6 @@ public class Aho {
 
             if(cc == '\n') {
                 lineCount++;
-                //wordIndexStart = -1;
             }
 
 
@@ -208,18 +207,17 @@ public class Aho {
                 out.addAll(Output.get(currState.getId()));
                 results.add(lineCount);
 
-                System.out.println("AHO - Word found at index: "+(i-(Output.get(currState.getId()).getFirst().length()-1)));
+                System.out.println("AHO - Word found at index: "+(jobPart.getOffset()+i-(Output.get(currState.getId()).getFirst().length()-1)));
+                System.out.println("AHO - Offset: "+jobPart.getOffset());
 
-                wordStart.add(wordIndexStart-(Output.get(currState.getId()).getFirst().length()-1));
-                //wordEnd.add(wordIndexStart+1);
+                wordStart.add(jobPart.getOffset()+i-(Output.get(currState.getId()).getFirst().length()-1));
                 wordEnd.add(Output.get(currState.getId()).getFirst().length());
                 wordFounded++;
             }
-            wordIndexStart++;
         }
-        DataContainer.wordIndexStart = wordStart;
-        DataContainer.wordIndexStop = wordEnd;
+        jobPart.wordStart = wordStart;
+        jobPart.wordLength = wordEnd;
         System.out.println("AHO - How many words found: "+wordFounded);
-        return results;
+        //return results;
     }
 }

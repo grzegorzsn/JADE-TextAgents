@@ -51,6 +51,7 @@ public class OutputGUI extends DataContainer {
             System.out.println(doc.getLength());
             System.out.println("GUI - How many words found: "+wordIndexStart.size());
             for(int i=0; i<wordIndexStart.size(); i++) {
+                System.out.println(wordIndexStart.get(i));
                 wordToChange = doc.getText(wordIndexStart.get(i), wordIndexStop.get(i));
                 System.out.println("Word to change: " + wordToChange + " IT IS FROM: "+wordIndexStart.get(i));
                 doc.remove(wordIndexStart.get(i), wordIndexStop.get(i));

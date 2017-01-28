@@ -14,7 +14,7 @@ public class TextJobProcessor {
 
     public static ArrayList<TextJobPart> loadParts(String filePath, String[] input) {
         //CO ILE LINII DZIELIC TEKST | liczba linii / liczba agentow (zaokragl w gore)
-        float numberOfLinesInFragment = (float) 5000.0;
+        float numberOfLinesInFragment = (float) 10.0;
         //ile lini w pliku (potrzebne do stworzenia arraya fragmentow o odpowiedniej wielkosci)
         long linesNumber = 0;
         //linie tekstu
@@ -57,14 +57,15 @@ public class TextJobProcessor {
             parts[i].setInput(input);
         }
 
+        int offset = 0;
         for (int i = 0; i < lines.length; i++) {
-
-            if (linesCounter > numberOfLinesInFragment) {
-                parts[currentFragmentSave].setOffset(currentFragmentSave*(int)numberOfLinesInFragment);
+            if (linesCounter >= numberOfLinesInFragment) {
+                parts[currentFragmentSave].setOffset(offset);
                 currentFragmentSave++;
                 linesCounter = 0;
             }
-
+            System.out.println(offset);
+            offset += lines[i].length()+1;
             parts[currentFragmentSave].addLine(lines[i] + "\n");
             linesCounter++;
         }
@@ -80,8 +81,7 @@ public class TextJobProcessor {
         Aho sm = new Aho(false);
         sm.createTrie(part.getInput());
         sm.getFailure();
-        ArrayList<Integer> matches = sm.search(part.getLines().toString(), false);
-        part.setResults(matches);
+        sm.search(part, false);
         return part;
     }
 
