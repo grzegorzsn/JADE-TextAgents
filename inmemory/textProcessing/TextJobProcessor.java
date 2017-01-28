@@ -85,4 +85,10 @@ public class TextJobProcessor {
         return part;
     }
 
+    public static TextJobPart processFind(TextJobPart part)
+    {
+        // TODO create processing with find instead of Aho-Corasick
+        return part;
+    }
+
 }
