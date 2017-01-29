@@ -178,22 +178,35 @@ public class MachineMaster extends Agent {
         DataContainer.wordIndexStart = new ArrayList<Integer>();
         DataContainer.wordIndexStop = new ArrayList<Integer>();
 
+        long algorithmProcessingTime = 0;
         fullText = new StringBuilder();
         out.println("MASTER: job done, parts sorted.");
         for(TextJobPart part : partsProcessed) {
             fullText.append(part.getLines().toString());
-
             DataContainer.foundLines.addAll(part.getResults());
             DataContainer.wordIndexStart.addAll(part.wordStart);
             DataContainer.wordIndexStop.addAll(part.wordLength);
+            algorithmProcessingTime += part.getProcessingtTime();
         }
         DataContainer.TextToParse = fullText.toString();
-        long processingTime = nanoTime() - timestamp;
-        double processingTimeSecs = processingTime / 1000000000.0;
+        long platformProcessingTime = nanoTime() - timestamp;
+        double platformProcessingTimeSecs = platformProcessingTime / 1000000000.0;
+        double algorithmProcessingTimeSecs = algorithmProcessingTime / 1000000000.0;
+        out.println("MASTER: Job processing finished" );
+        String configurationDescription = "MASTER: Configuration: algorithm=";
+        out.println("MASTER: Configuration: " );
         if(myGui.ACradiobutton.isSelected())
-            out.println("MASTER: job finished wtih AhoCorasick after: " + processingTimeSecs + "s" );
+            configurationDescription += "AhoCorasick";
         else
-            out.println("MASTER: job finished wtih find function after: " + processingTimeSecs +"s" );
+            configurationDescription += "find";
+        configurationDescription += " in-memory=";
+        if(inmmemory)
+            configurationDescription += "true";
+        else
+            configurationDescription += "false";
+        out.println(configurationDescription);
+        out.println("MASTER: platform processing time: " + platformProcessingTimeSecs + "s");
+        out.println("MASTER: algorithm processing time: " + algorithmProcessingTimeSecs + "s");
         resultsGui = new OutputGUI();
         resultsGui.showOutput();
         DataContainer.wipeOut();
