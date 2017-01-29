@@ -21,7 +21,7 @@ public class TextJobPart implements Comparable, Serializable {
     private int offset = 0; //numer startowej linii
     StringBuilder lines; //tekst
     ArrayList<Integer> results = new ArrayList<Integer>();
-    private String[] input;
+    //private String[] input;
     private int id = 0;
 
 
@@ -56,17 +56,11 @@ public class TextJobPart implements Comparable, Serializable {
             resultsShifted.add(result + offset);
         return resultsShifted;
     }
-    public String[] getInput() {
-        return input;
-    }
     public int getId() {
         return id;
     }
     public void setId(int id) {
         this.id = id;
-    }
-    public void setInput(String[] input) {
-        this.input = input;
     }
     public int getOffset() {
         return offset;

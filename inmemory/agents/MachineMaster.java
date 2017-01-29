@@ -102,6 +102,7 @@ public class MachineMaster extends Agent {
             e.printStackTrace();
         }
         timestamp = nanoTime();
+        addBehaviour(new sendPrepareProcessorRequest());
         addBehaviour(new sendPartsToWorkers());
         addBehaviour(new listener());
     }
@@ -205,6 +206,38 @@ public class MachineMaster extends Agent {
         }
     }
 
+    private class sendPrepareProcessorRequest extends Behaviour
+    {
+        public void action() {
+            if(workersOnPlatform == null || workersOnPlatform.length < 1)
+            {
+                out.println("MachineMaster "+getAID().getName()+" I DO NOT SEE ANY WORKERS");
+                return;
+            }
+
+            for(AID workerAID : workersOnPlatform)
+            {
+                ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
+                request.addReceiver(workerAID);
+                String content = null;
+                request.setLanguage("text-jobs");
+                request.setOntology("text-job-inivitation");
+                try {
+                    content = Serializer.toString(here());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                request.setContent(content);
+                myAgent.send(request);
+            }
+            addBehaviour(new listener());
+            block();
+        }
+
+        public boolean done() {
+            return true;
+        }
+    }
 
     private class askWorkersForLocations extends Behaviour {
         public void action() {

@@ -21,6 +21,9 @@ import java.util.Hashtable;
  * Created by Grzegorz on 2017-01-23.
  */
 public class Worker extends Agent {
+
+    protected TextJobProcessor processor = null;
+
     protected void setup() {
 
         DFAgentDescription dfd = new DFAgentDescription();
@@ -61,13 +64,28 @@ public class Worker extends Agent {
                 String content;
                 switch (ont)
                 {
+                    case "test-job-prepare-job-processor":
+                        content = msg.getContent();
+                        reply = msg.createReply();
+                        String[] searchedWords = null;
+                        try {
+                            searchedWords = (String[])Serializer.fromString(content);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        processor = new TextJobProcessor(searchedWords);
+                        reply.setOntology("text-job-processor-prepared");
+                        myAgent.send(reply);
+                        break;
                     case "text-job-part-to-process":
                         content = msg.getContent();
                         reply = msg.createReply();
                         TextJobPart part = null;
                         try {
                             part = (TextJobPart)Serializer.fromString(content);
-                            System.out.println("Worker " + getLocalName() + " job received");
+                            //System.out.println("Worker " + getLocalName() + " job received");
                         } catch (IOException e) {
                             e.printStackTrace();
                         } catch (ClassNotFoundException e) {
@@ -75,9 +93,9 @@ public class Worker extends Agent {
                         }
                         TextJobPart processedPart;
                         if(part.isAho())
-                            processedPart = TextJobProcessor.processAho(part);
+                            processedPart = processor.processAho(part);
                         else
-                            processedPart = TextJobProcessor.processFind(part);
+                            processedPart = processor.processFind(part);
                         reply.setContent(myAgent.getName());
                         reply.setOntology("text-job-processed-part");
                         try {

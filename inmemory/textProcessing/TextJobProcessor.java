@@ -12,9 +12,17 @@ import java.util.ArrayList;
  */
 public class TextJobProcessor {
 
-
+    private Aho sm;
+    private String[] searchedWords;
+    public TextJobProcessor(String[] searchedWords) {
+        this.searchedWords = searchedWords;
+        sm = new Aho(false);
+        sm.createTrie(searchedWords);
+        sm.getFailure();
+    }
 
     public static ArrayList<TextJobPart> loadParts(String filePath, String[] input, boolean aho) {
+
         float numberOfLinesInFragment = (float) 100;
         long linesNumber = 0;
         String[] lines = null;
@@ -79,21 +87,18 @@ public class TextJobProcessor {
         return partsArray;
     }
 
-    public static TextJobPart processAho(TextJobPart part)
+    public TextJobPart processAho(TextJobPart part)
     {
-        Aho sm = new Aho(false);
-        sm.createTrie(part.getInput());
-        sm.getFailure();
         sm.search(part, false);
         return part;
     }
 
-    public static TextJobPart processFind(TextJobPart part)
+    public TextJobPart processFind(TextJobPart part)
     {
         String allText = part.getLines().toString();
         part.wordLength = new ArrayList<>();
         part.wordStart = new ArrayList<>();
-        for (String searchedWord : part.getInput()) {
+        for (String searchedWord : searchedWords) {
             for (int i = -1; (i = allText.indexOf(searchedWord, i + 1)) != -1; ) {
                 part.wordStart.add(i + part.getOffset());
                 part.wordLength.add(searchedWord.length());
