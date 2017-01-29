@@ -63,8 +63,8 @@ public class MachineMaster extends Agent {
             fe.printStackTrace();
         }
 
-        addBehaviour(new refreshWorkersPeriodically(this, 1000));
-        addBehaviour(new refreshWorkersOnMachinePeriodically(this, 1000));
+        addBehaviour(new refreshWorkersPeriodically(this, 100000));
+        addBehaviour(new refreshWorkersOnMachinePeriodically(this, 100000));
 
         addBehaviour(new listener());
     }
@@ -82,13 +82,75 @@ public class MachineMaster extends Agent {
         out.println("MachineMaster "+getAID().getName()+" terminating.");
     }
 
+
+    private class listener extends Behaviour {
+        public void action()
+        {
+            ACLMessage msg = myAgent.receive();
+            if (msg != null  && msg.getLanguage().equals("text-jobs")) {
+                String ont = msg.getOntology();
+                String content;
+                switch (ont)
+                {
+                    case "text-jobs-job-result":
+                        out.println("MASTER: Result received");
+                        break;
+
+                    case "text-job-inivitation-accepted":
+                        break;
+
+                    case "text-job-processed-part":
+                        if(!jobProcessing) break; // TODO send message to Worker, that there is no job processing.
+                        content = msg.getContent();
+                        TextJobPart part = null;
+                        try {
+                            part = (TextJobPart)Serializer.fromString(content);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        out.println("MASTER: Part received: " +  part.getResults());
+                        partsProcessed.add(part); // TODO verify part is correctly processed.
+                        if(checkJobProcessed()) manageJobProcessed();
+                        break;
+
+                    case "text-job-location-question-response":
+                        content = msg.getContent();
+                        Location receivedLocation = null;
+                        try {
+                            receivedLocation = (Location)Serializer.fromString(content);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        if(receivedLocation.equals(here())) workersOnMachine.add(msg.getSender());
+                        else workersOutsideMachine.add(msg.getSender());
+                        break;
+
+                    default:
+                        out.println("MASTER: Unknown message received");
+                }
+            }
+            addBehaviour(new listener());
+            block();
+        }
+
+        public boolean done()
+        {
+            return true;
+        }
+    }
+
+
     public void manageJob(String path, String[] input) {
         if(myGui.ACradiobutton.isSelected())
             out.println("MASTER: started processing job using Aho-Corasick");
         else
             out.println("MASTER: started processing job using standard find function");
         timestamp = nanoTime();
-        partsToProcess = TextJobProcessor.loadParts(path, input, myGui.ACradiobutton.isSelected());
+        partsToProcess = TextJobProcessor.loadParts(path,myGui.ACradiobutton.isSelected());
         partsProcessed = new ArrayList<TextJobPart>();
         for (TextJobPart part : partsToProcess)
             part.setId(random.nextInt());
@@ -102,7 +164,7 @@ public class MachineMaster extends Agent {
             e.printStackTrace();
         }
         timestamp = nanoTime();
-        addBehaviour(new sendPrepareProcessorRequest());
+        addBehaviour(new sendPrepareProcessorRequest(input));
         addBehaviour(new sendPartsToWorkers());
         addBehaviour(new listener());
     }
@@ -208,6 +270,12 @@ public class MachineMaster extends Agent {
 
     private class sendPrepareProcessorRequest extends Behaviour
     {
+        private String[] searchedWords;
+        public sendPrepareProcessorRequest(String[] searchedWords)
+        {
+            this.searchedWords = searchedWords;
+        }
+
         public void action() {
             if(workersOnPlatform == null || workersOnPlatform.length < 1)
             {
@@ -221,9 +289,9 @@ public class MachineMaster extends Agent {
                 request.addReceiver(workerAID);
                 String content = null;
                 request.setLanguage("text-jobs");
-                request.setOntology("text-job-inivitation");
+                request.setOntology("test-job-prepare-job-processor");
                 try {
-                    content = Serializer.toString(here());
+                    content = Serializer.toString(searchedWords);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -309,66 +377,6 @@ public class MachineMaster extends Agent {
         }
 
         public boolean done() {
-            return true;
-        }
-    }
-
-    private class listener extends Behaviour {
-        public void action()
-        {
-            ACLMessage msg = myAgent.receive();
-            if (msg != null  && msg.getLanguage().equals("text-jobs")) {
-                String ont = msg.getOntology();
-                String content;
-                switch (ont)
-                {
-                    case "text-jobs-job-result":
-                        out.println("MASTER: Result received");
-                        break;
-
-                    case "text-job-inivitation-accepted":
-                        break;
-
-                    case "text-job-processed-part":
-                        if(!jobProcessing) break; // TODO send message to Worker, that there is no job processing.
-                        content = msg.getContent();
-                        TextJobPart part = null;
-                        try {
-                            part = (TextJobPart)Serializer.fromString(content);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                        out.println("MASTER: Part received: " +  part.getResults());
-                        partsProcessed.add(part); // TODO verify part is correctly processed.
-                        if(checkJobProcessed()) manageJobProcessed();
-                        break;
-
-                    case "text-job-location-question-response":
-                        content = msg.getContent();
-                        Location receivedLocation = null;
-                        try {
-                            receivedLocation = (Location)Serializer.fromString(content);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                        if(receivedLocation.equals(here())) workersOnMachine.add(msg.getSender());
-                        else workersOutsideMachine.add(msg.getSender());
-                        break;
-
-                    default:
-                        out.println("MASTER: Unknown message received");
-                }
-            }
-            addBehaviour(new listener());
-            block();
-        }
-
-        public boolean done()
-        {
             return true;
         }
     }

@@ -56,7 +56,7 @@ public class OutputGUI extends DataContainer {
 
         frame.setLocation(centerX - frame.getWidth() / 2, centerY - frame.getHeight() / 2);
         frame.setResizable(true);
-        //colorTextData(TextToParse, textPanel);
+        colorTextData(TextToParse, textPanel);
         textPanel.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);

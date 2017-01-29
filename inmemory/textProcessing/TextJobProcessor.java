@@ -21,7 +21,7 @@ public class TextJobProcessor {
         sm.getFailure();
     }
 
-    public static ArrayList<TextJobPart> loadParts(String filePath, String[] input, boolean aho) {
+    public static ArrayList<TextJobPart> loadParts(String filePath, boolean aho) {
 
         float numberOfLinesInFragment = (float) 100;
         long linesNumber = 0;
@@ -65,7 +65,6 @@ public class TextJobProcessor {
         for (int i = 0; i < parts.length; i++) {
             parts[i] = new TextJobPart();
             parts[i].setNumber(i);
-            parts[i].setInput(input);
             parts[i].setAho(aho);
         }
 
@@ -89,7 +88,7 @@ public class TextJobProcessor {
 
     public TextJobPart processAho(TextJobPart part)
     {
-        sm.search(part, false);
+        sm.search(part, true);
         return part;
     }
 
