@@ -145,6 +145,8 @@ public class Aho {
     }
     protected boolean getMatchChar(state currState, char cc, boolean isCaseSensitive){
         boolean matchChar;
+        return currState.nextStates.containsKey(cc);
+        /*
         if (isCaseSensitive){
             if (currState.nextStates.containsKey(cc) == false)
                 matchChar = false;
@@ -157,9 +159,10 @@ public class Aho {
             else
                 matchChar = true;
         }
-        return matchChar;
+        return matchChar;*/
     }
     protected void search(TextJobPart jobPart, boolean isCaseSensitive){
+
         String searchText = jobPart.getLines().toString();
         LinkedList<String> out = new LinkedList<String>();
         results.clear();

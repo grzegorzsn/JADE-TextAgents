@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static java.lang.System.nanoTime;
+import static java.lang.System.out;
 
 /**
  * Created by Grzegorz on 2017-01-23.
@@ -93,19 +94,14 @@ public class TextJobProcessor {
     public TextJobPart processAho(TextJobPart part)
     {
         timestamp = nanoTime();
-
         sm.search(part, true);
-
-        timestampRoznica += nanoTime() - timestamp;
-
-        System.out.println("CZAS PRZETWARZANIA: " +timestampRoznica/1000000000);
+        part.setProcessingtTime(nanoTime() - timestamp);
         return part;
     }
 
     public TextJobPart processFind(TextJobPart part)
     {
         timestamp = nanoTime();
-
         String allText = part.getLines().toString();
         part.wordLength = new ArrayList<>();
         part.wordStart = new ArrayList<>();
@@ -115,12 +111,7 @@ public class TextJobProcessor {
                 part.wordLength.add(searchedWord.length());
             }
         }
-
-        timestampRoznica += nanoTime() - timestamp;
-
-        System.out.println("CZAS PRZETWARZANIA: " +timestampRoznica/1000000000);
-
-        // TODO create processing with find instead of Aho-Corasick
+        part.setProcessingtTime(nanoTime() - timestamp);
         return part;
     }
 

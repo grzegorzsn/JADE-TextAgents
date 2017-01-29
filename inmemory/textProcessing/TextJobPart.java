@@ -21,8 +21,8 @@ public class TextJobPart implements Comparable, Serializable {
     private int offset = 0; //numer startowej linii
     StringBuilder lines; //tekst
     ArrayList<Integer> results = new ArrayList<Integer>();
-    //private String[] input;
     private int id = 0;
+    private long processingtTime;
 
 
 
@@ -82,5 +82,15 @@ public class TextJobPart implements Comparable, Serializable {
     public void setAho(boolean aho) {
         this.aho = aho;
     }
+
+
+    public long getProcessingtTime() {
+        return processingtTime;
+    }
+
+    public void setProcessingtTime(long processingtTime) {
+        this.processingtTime = processingtTime;
+    }
+
 
 }
