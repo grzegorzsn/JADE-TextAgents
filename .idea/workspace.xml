@@ -6,30 +6,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64230bb7-5ccc-4740-948d-08aa2c02649f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$askWorkersForLocations.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$askWorkersForLocations.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$inviteWorkers.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$inviteWorkers.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$listener.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$listener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$processJob.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$processJob.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$refreshWorkersOnMachinePeriodically.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$refreshWorkersOnMachinePeriodically.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$refreshWorkersOnPlatform.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$refreshWorkersOnPlatform.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$refreshWorkersPeriodically.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$refreshWorkersPeriodically.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$sendPartsToWorkers.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster$sendPartsToWorkers.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMaster.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMasterGUI$6.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/MachineMasterGUI$6.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/OutputGUI.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/OutputGUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/Worker$listener.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/Worker$listener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/agents/Worker.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/agents/Worker.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/textProcessing/TextJobPart.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/textProcessing/TextJobPart.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/inmemory/textProcessing/TextJobProcessor.class" afterPath="$PROJECT_DIR$/out/production/agents/inmemory/textProcessing/TextJobProcessor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/APDescription.txt" afterPath="$PROJECT_DIR$/APDescription.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MTPs-Main-Container.txt" afterPath="$PROJECT_DIR$/MTPs-Main-Container.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inmemory/agents/MachineMaster.java" afterPath="$PROJECT_DIR$/inmemory/agents/MachineMaster.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inmemory/agents/OutputGUI.java" afterPath="$PROJECT_DIR$/inmemory/agents/OutputGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inmemory/textProcessing/TextJobProcessor.java" afterPath="$PROJECT_DIR$/inmemory/textProcessing/TextJobProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/.idea/workspace.xml" afterPath="$PROJECT_DIR$/out/production/agents/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/APDescription.txt" afterPath="$PROJECT_DIR$/out/production/agents/APDescription.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/agents/MTPs-Main-Container.txt" afterPath="$PROJECT_DIR$/out/production/agents/MTPs-Main-Container.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,7 +31,7 @@
       <file leaf-file-name="TextJobPart.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/TextJobPart.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
+            <state relative-caret-position="-56">
               <caret line="17" column="24" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="24" />
               <folding />
             </state>
@@ -61,8 +41,8 @@
       <file leaf-file-name="Worker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inmemory/agents/Worker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-780">
-              <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+            <state relative-caret-position="-413">
+              <caret line="95" column="45" lean-forward="true" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -71,20 +51,8 @@
       <file leaf-file-name="TextJobProcessor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/TextJobProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="93" column="0" lean-forward="true" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Aho.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/Aho.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1241">
-              <caret line="93" column="17" lean-forward="false" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="17" />
+            <state relative-caret-position="355">
+              <caret line="99" column="0" lean-forward="true" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -95,12 +63,10 @@
       <file leaf-file-name="MachineMaster.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMaster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
+            <state relative-caret-position="-259">
+              <caret line="151" column="28" lean-forward="false" selection-start-line="151" selection-start-column="20" selection-end-line="151" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#10242#10243#0" expanded="true" />
-                <element signature="e#10300#10301#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -109,8 +75,8 @@
       <file leaf-file-name="OutputGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inmemory/agents/OutputGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="43" column="32" lean-forward="true" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
+            <state relative-caret-position="374">
+              <caret line="56" column="78" lean-forward="false" selection-start-line="56" selection-start-column="78" selection-end-line="56" selection-end-column="78" />
               <folding />
             </state>
           </provider>
@@ -129,8 +95,28 @@
       <file leaf-file-name="MachineMasterGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="21" column="52" lean-forward="false" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
+            <state relative-caret-position="165">
+              <caret line="140" column="63" lean-forward="true" selection-start-line="140" selection-start-column="63" selection-end-line="140" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="synonimy.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Documents/#TestFiles/synonimy.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="e4xtc_a.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Documents/#TestFiles/e4xtc_a.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="296">
+              <caret line="11360" column="67" lean-forward="false" selection-start-line="11360" selection-start-column="67" selection-end-line="11360" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -163,6 +149,8 @@
       <find>out.p</find>
       <find>WORD</find>
       <find>load</find>
+      <find>nano</find>
+      <find>nanoTime</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -193,6 +181,7 @@
         <option value="$PROJECT_DIR$/inmemory/agents/Worker.java" />
         <option value="$PROJECT_DIR$/inmemory/agents/MachineMaster.java" />
         <option value="$PROJECT_DIR$/inmemory/agents/OutputGUI.java" />
+        <option value="$USER_HOME$/Documents/#TestFiles/synonimy.txt" />
         <option value="$PROJECT_DIR$/inmemory/textProcessing/TextJobProcessor.java" />
       </list>
     </option>
@@ -204,9 +193,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="1912" />
     <option name="y" value="-8" />
-    <option name="width" value="1829" />
+    <option name="width" value="1936" />
     <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -227,6 +216,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -363,9 +355,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -722,11 +711,12 @@
       <workItem from="1485481482681" duration="13034000" />
       <workItem from="1485620296845" duration="5115000" />
       <workItem from="1485631039116" duration="1253000" />
+      <workItem from="1485652776004" duration="3623000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30492000" />
+    <option name="totallyTimeSpent" value="34115000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -738,7 +728,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1829" height="1096" extended-state="7" />
+    <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -750,13 +740,15 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2565923" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.51975685" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21345836" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21302083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -767,10 +759,8 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -802,14 +792,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/inmemory/agents/OutputGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="62" lean-forward="false" selection-start-line="33" selection-start-column="62" selection-end-line="33" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2125">
@@ -846,7 +828,7 @@
         <state relative-caret-position="663">
           <caret line="43" column="25" lean-forward="false" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -865,8 +847,6 @@
           <caret line="86" column="5" lean-forward="false" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#10242#10243#0" expanded="true" />
-            <element signature="e#10300#10301#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -915,7 +895,7 @@
         <state relative-caret-position="663">
           <caret line="43" column="25" lean-forward="false" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1025,48 +1005,32 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Documents/test.txt" />
-    <entry file="file://$USER_HOME$/Documents/#TestFiles/e4xtc_a.txt" />
     <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="-204">
           <caret line="3" column="10" lean-forward="false" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/#TestFiles/big.txt" />
-    <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/TextJobPart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="17" column="24" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="24" />
-          <folding />
-        </state>
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Documents/#TestFiles/big.txt" />
     <entry file="jar://$PROJECT_DIR$/lib/jade.jar!/jade/core/behaviours/Behaviour.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
           <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inmemory/agents/Worker.java">
+    <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/Aho.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-780">
-          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="21" column="52" lean-forward="false" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
-          <folding />
+        <state relative-caret-position="1513">
+          <caret line="93" column="17" lean-forward="false" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1078,40 +1042,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMaster.java">
+    <entry file="file://$USER_HOME$/Documents/#TestFiles/synonimy.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="197" column="0" lean-forward="false" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#10242#10243#0" expanded="true" />
-            <element signature="e#10300#10301#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="238">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/#TestFiles/e4xtc_a.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="11360" column="67" lean-forward="false" selection-start-line="11360" selection-start-column="67" selection-end-line="11360" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/TextJobPart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-56">
+          <caret line="17" column="24" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMasterGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="140" column="63" lean-forward="true" selection-start-line="140" selection-start-column="63" selection-end-line="140" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/inmemory/agents/OutputGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="43" column="32" lean-forward="true" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
+        <state relative-caret-position="374">
+          <caret line="56" column="78" lean-forward="false" selection-start-line="56" selection-start-column="78" selection-end-line="56" selection-end-column="78" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/Aho.java">
+    <entry file="file://$PROJECT_DIR$/inmemory/agents/MachineMaster.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1241">
-          <caret line="93" column="17" lean-forward="false" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="17" />
+        <state relative-caret-position="-259">
+          <caret line="151" column="28" lean-forward="false" selection-start-line="151" selection-start-column="20" selection-end-line="151" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/inmemory/agents/Worker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-413">
+          <caret line="95" column="45" lean-forward="true" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/inmemory/textProcessing/TextJobProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="93" column="0" lean-forward="true" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+        <state relative-caret-position="355">
+          <caret line="99" column="0" lean-forward="true" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

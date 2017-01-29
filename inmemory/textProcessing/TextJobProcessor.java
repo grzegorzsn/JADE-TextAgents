@@ -7,11 +7,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static java.lang.System.nanoTime;
+
 /**
  * Created by Grzegorz on 2017-01-23.
  */
 public class TextJobProcessor {
 
+    private long timestamp = 0;
+    private double timestampRoznica = 0;
     private Aho sm;
     private String[] searchedWords;
     public TextJobProcessor(String[] searchedWords) {
@@ -23,7 +27,7 @@ public class TextJobProcessor {
 
     public static ArrayList<TextJobPart> loadParts(String filePath, boolean aho) {
 
-        float numberOfLinesInFragment = (float) 100;
+        float numberOfLinesInFragment = (float) 500;
         long linesNumber = 0;
         String[] lines = null;
 
@@ -88,12 +92,20 @@ public class TextJobProcessor {
 
     public TextJobPart processAho(TextJobPart part)
     {
+        timestamp = nanoTime();
+
         sm.search(part, true);
+
+        timestampRoznica += nanoTime() - timestamp;
+
+        System.out.println("CZAS PRZETWARZANIA: " +timestampRoznica/1000000000);
         return part;
     }
 
     public TextJobPart processFind(TextJobPart part)
     {
+        timestamp = nanoTime();
+
         String allText = part.getLines().toString();
         part.wordLength = new ArrayList<>();
         part.wordStart = new ArrayList<>();
@@ -103,6 +115,10 @@ public class TextJobProcessor {
                 part.wordLength.add(searchedWord.length());
             }
         }
+
+        timestampRoznica += nanoTime() - timestamp;
+
+        System.out.println("CZAS PRZETWARZANIA: " +timestampRoznica/1000000000);
 
         // TODO create processing with find instead of Aho-Corasick
         return part;
