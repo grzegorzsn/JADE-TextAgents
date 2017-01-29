@@ -12,12 +12,11 @@ public class Aho {
     protected int numStates;
     protected state zeroState;
     protected boolean verbose;
-    private int lineCount = 0;
     private int wordIndexStart = 0;
-    private ArrayList<Integer> results = new ArrayList<Integer>();
     private ArrayList<Integer> wordStart = new ArrayList<Integer>();
     private ArrayList<Integer> wordEnd = new ArrayList<Integer>();
     private int wordFounded = 0;
+    private String searchText;
 
     protected class state{
         private int id;
@@ -143,68 +142,42 @@ public class Aho {
         if(verbose) System.out.print(Output.toString() + "\n");
         if(verbose) System.out.print(Failure.toString() + "\n");
     }
-    protected boolean getMatchChar(state currState, char cc, boolean isCaseSensitive){
+    protected boolean getMatchChar(state currState, char cc){
         boolean matchChar;
-        return currState.nextStates.containsKey(cc);
-        /*
-        if (isCaseSensitive){
-            if (currState.nextStates.containsKey(cc) == false)
-                matchChar = false;
-            else
-                matchChar = true;
-        }
-        else{
-            if (currState.nextStates.containsKey(Character.toLowerCase(cc)) == false && currState.nextStates.containsKey(Character.toUpperCase(cc)) == false)
-                matchChar = false;
-            else
-                matchChar = true;
-        }
-        return matchChar;*/
-    }
-    protected void search(TextJobPart jobPart, boolean isCaseSensitive){
 
-        String searchText = jobPart.getLines().toString();
+        if (currState.nextStates.containsKey(cc) == false)
+            matchChar = false;
+        else
+            matchChar = true;
+
+        return matchChar;
+    }
+    protected void search(TextJobPart jobPart){
+
+        searchText = jobPart.getLines().toString();
         LinkedList<String> out = new LinkedList<String>();
-        results.clear();
         state currState = zeroState;
+
         for(int i=0; i<searchText.length(); i++){
+
             char cc = searchText.charAt(i);
-            while(currState.getId() != 0 && !getMatchChar(currState,cc,isCaseSensitive)){
+
+            while(currState.getId() != 0 && !getMatchChar(currState,cc))
                 if (currState.getId() == 0)
                     currState = zeroState;
-                else {
-                    currState = stateMap.get(Failure.get(currState.getId()));
-                }
-
-            }
-
-            if(cc == '\n') {
-                lineCount++;
-            }
-
-            if(getMatchChar(currState,cc,isCaseSensitive)){
-                state tmpState = stateMap.get(currState.nextStates.get(cc));
-                if (!isCaseSensitive && tmpState == null){
-                    if(Character.isLowerCase(cc))
-                        currState = stateMap.get(currState.nextStates.get(Character.toUpperCase(cc)));
-                    else
-                        currState = stateMap.get(currState.nextStates.get(Character.toLowerCase(cc)));
-                }
                 else
-                    currState = tmpState;
-            }
-            else{
-                if(currState.getId() == 0) {
+                    currState = stateMap.get(Failure.get(currState.getId()));
+
+            if(getMatchChar(currState,cc))
+                currState = stateMap.get(currState.nextStates.get(cc));
+            else
+                if(currState.getId() == 0)
                     currState = zeroState;
-                }
                 else
                     if(verbose) System.out.print("Something wrong...\n");
-            }
 
-            if(verbose) System.out.print(currState.getId() + "=>");
             if (Output.containsKey(currState.getId())){
                 out.addAll(Output.get(currState.getId()));
-                results.add(lineCount);
                 wordStart.add(jobPart.getOffset()+i-(Output.get(currState.getId()).getFirst().length()-1));
                 wordEnd.add(Output.get(currState.getId()).getFirst().length());
                 wordFounded++;

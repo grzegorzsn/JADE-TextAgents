@@ -28,7 +28,7 @@ public class TextJobProcessor {
 
     public static ArrayList<TextJobPart> loadParts(String filePath, boolean aho) {
 
-        float numberOfLinesInFragment = (float) 500;
+        float numberOfLinesInFragment = (float) 1000;
         long linesNumber = 0;
         String[] lines = null;
 
@@ -94,7 +94,7 @@ public class TextJobProcessor {
     public TextJobPart processAho(TextJobPart part)
     {
         timestamp = nanoTime();
-        sm.search(part, true);
+        sm.search(part);
         part.setProcessingtTime(nanoTime() - timestamp);
         return part;
     }
